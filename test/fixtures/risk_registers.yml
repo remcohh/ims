@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  risk_no: MyString
+  project_id: 
+  category_id: 
+  description: MyText
+  probability: MyString
+  impact: MyString
+  user_id: 
+  target_date: 2016-12-15
+  status: false
+
+two:
+  risk_no: MyString
+  project_id: 
+  category_id: 
+  description: MyText
+  probability: MyString
+  impact: MyString
+  user_id: 
+  target_date: 2016-12-15
+  status: false

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  risk_register_id: 
+  mitigation_step: MyText
+
+two:
+  risk_register_id: 
+  mitigation_step: MyText

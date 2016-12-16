@@ -1,0 +1,2 @@
+json.extract! risk_register, :id, :risk_no, :project_id, :category_id, :description, :probability, :impact, :user_id, :target_date, :status, :created_at, :updated_at
+json.url risk_register_url(risk_register, format: :json)

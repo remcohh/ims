@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Risk Mitigations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Risk register</th>
+      <th>Mitigation step</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @risk_mitigations.each do |risk_mitigation| %>
+      <tr>
+        <td><%= risk_mitigation.risk_register %></td>
+        <td><%= risk_mitigation.mitigation_step %></td>
+        <td><%= link_to 'Show', risk_mitigation %></td>
+        <td><%= link_to 'Edit', edit_risk_mitigation_path(risk_mitigation) %></td>
+        <td><%= link_to 'Destroy', risk_mitigation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Risk mitigation', new_risk_mitigation_path %>

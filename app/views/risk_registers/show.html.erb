@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Risk no:</strong>
+  <%= @risk_register.risk_no %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @risk_register.project.name %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <% @risk_register.categories.each do |category| %>
+    <%= category.name %>,
+  <% end %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @risk_register.description %>
+</p>
+
+<p>
+  <strong>Probability:</strong>
+  <%= @risk_register.probability %>
+</p>
+
+<p>
+  <strong>Impact:</strong>
+  <%= @risk_register.impact %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @risk_register.user %>
+</p>
+
+<p>
+  <strong>Target date:</strong>
+  <%= @risk_register.target_date %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @risk_register.status %>
+</p>
+
+<%= link_to 'Edit', edit_risk_register_path(@risk_register) %> |
+<%= link_to 'Back', risk_registers_path %>

@@ -1,0 +1,1 @@
+json.partial! "risk_responsibilities/risk_responsibility", risk_responsibility: @risk_responsibility

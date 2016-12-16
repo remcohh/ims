@@ -1,0 +1,2 @@
+module RiskRegistersHelper
+end

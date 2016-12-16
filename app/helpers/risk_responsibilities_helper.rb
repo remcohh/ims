@@ -1,0 +1,2 @@
+module RiskResponsibilitiesHelper
+end

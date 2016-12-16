@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Risk register:</strong>
+  <%= @risk_mitigation.risk_register %>
+</p>
+
+<p>
+  <strong>Mitigation step:</strong>
+  <%= @risk_mitigation.mitigation_step %>
+</p>
+
+<%= link_to 'Edit', edit_risk_mitigation_path(@risk_mitigation) %> |
+<%= link_to 'Back', risk_mitigations_path %>
