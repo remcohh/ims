@@ -27,14 +27,6 @@ ActiveRecord::Schema.define(version: 20161216094712) do
   add_index "categories_risk_registers", ["category_id"], name: "index_categories_risk_registers_on_category_id"
   add_index "categories_risk_registers", ["risk_register_id"], name: "index_categories_risk_registers_on_risk_register_id"
 
-  create_table "category_risk_registers", force: :cascade do |t|
-    t.integer "risk_register_id"
-    t.integer "category_id"
-  end
-
-  add_index "category_risk_registers", ["category_id"], name: "index_category_risk_registers_on_category_id"
-  add_index "category_risk_registers", ["risk_register_id"], name: "index_category_risk_registers_on_risk_register_id"
-
   create_table "designations", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -72,14 +64,6 @@ ActiveRecord::Schema.define(version: 20161216094712) do
   add_index "risk_registers", ["project_id"], name: "index_risk_registers_on_project_id"
   add_index "risk_registers", ["risk_no"], name: "index_risk_registers_on_risk_no"
   add_index "risk_registers", ["user_id"], name: "index_risk_registers_on_user_id"
-
-  create_table "risk_registers_categories", force: :cascade do |t|
-    t.integer "risk_register_id"
-    t.integer "category_id"
-  end
-
-  add_index "risk_registers_categories", ["category_id"], name: "index_risk_registers_categories_on_category_id"
-  add_index "risk_registers_categories", ["risk_register_id"], name: "index_risk_registers_categories_on_risk_register_id"
 
   create_table "risk_responsibilities", force: :cascade do |t|
     t.integer  "risk_register_id"

@@ -1,4 +1,5 @@
 class RiskResponsibilitiesController < ApplicationController
+  before_action :authorize
   before_action :set_risk_responsibility, only: [:show, :edit, :update, :destroy]
 
   # GET /risk_responsibilities

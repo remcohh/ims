@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+gem 'simple_form'
+
 gem 'bootstrap-multiselect-rails'
 #bootstrap gems
 gem 'bootstrap-sass', '~> 3.3.6'

@@ -1,4 +1,5 @@
 class RiskMitigationsController < ApplicationController
+  before_action :authorize
   before_action :set_risk_mitigation, only: [:show, :edit, :update, :destroy]
 
   # GET /risk_mitigations

@@ -1,4 +1,5 @@
 class RiskRegistersController < ApplicationController
+  before_action :authorize
   before_action :set_risk_register, only: [:show, :edit, :update, :destroy]
 
   # GET /risk_registers
@@ -24,7 +25,7 @@ class RiskRegistersController < ApplicationController
   # POST /risk_registers
   # POST /risk_registers.json
   def create
-    @risk_register = RiskRegister.new(risk_register_params)
+    @risk_register = current_user.risk_registers.build(risk_register_params)
 
     respond_to do |format|
       if @risk_register.save
@@ -69,6 +70,6 @@ class RiskRegistersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_register_params
-      params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :user_id, :target_date, :status, :category_ids => [])
+      params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :target_date, :status, :category_ids => [])
     end
 end
