@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  get 'dashboard/index'
+
   get 'session/new'
 
-  resources :risk_responsibilities
   resources :risk_mitigations
   resources :risk_registers
   resources :categories
@@ -13,5 +14,5 @@ Rails.application.routes.draw do
   post 'login' => 'session#create'
   get 'logout' => 'session#destroy'
 
-  root 'designations#index'
+  root 'dashboard#index'
 end

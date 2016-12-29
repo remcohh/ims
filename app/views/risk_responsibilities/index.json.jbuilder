@@ -1,1 +1,0 @@
-json.array! @risk_responsibilities, partial: 'risk_responsibilities/risk_responsibility', as: :risk_responsibility

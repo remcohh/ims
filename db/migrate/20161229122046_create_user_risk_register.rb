@@ -1,10 +1,8 @@
-class CreateRiskResponsibilities < ActiveRecord::Migration
+class CreateUserRiskRegister < ActiveRecord::Migration
   def change
-    create_table :risk_responsibilities do |t|
+    create_table :users_risk_registers do |t|
       t.references :risk_register, index: true, foreign_key: true
       t.references :user, index: true, foreign_key: true
-
-      t.timestamps null: false
     end
   end
 end

@@ -34,7 +34,7 @@
 
 <p>
   <strong>Created by:</strong>
-  <%= @risk_register.user.email %>
+  <%= User.find(@risk_register.created_by).email %>
 </p>
 
 <p>
@@ -45,6 +45,13 @@
 <p>
   <strong>Status:</strong>
   <%= @risk_register.status %>
+</p>
+
+<p>
+  <strong>Risk Mitigators:</strong>
+  <% @risk_register.users.each do |user| %>
+    <%= user.email %>,
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_risk_register_path(@risk_register) %> |

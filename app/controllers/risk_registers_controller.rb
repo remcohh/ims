@@ -25,8 +25,9 @@ class RiskRegistersController < ApplicationController
   # POST /risk_registers
   # POST /risk_registers.json
   def create
-    @risk_register = current_user.risk_registers.build(risk_register_params)
-
+    @risk_register = RiskRegister.new(risk_register_params)
+    @risk_register.created_by = current_user.id
+    
     respond_to do |format|
       if @risk_register.save
         format.html { redirect_to @risk_register, notice: 'Risk register was successfully created.' }
@@ -70,6 +71,6 @@ class RiskRegistersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_register_params
-      params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :target_date, :status, :category_ids => [])
+      params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :target_date, :status, :category_ids => [], :user_ids => [])
     end
 end

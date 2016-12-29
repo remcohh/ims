@@ -1,57 +1,21 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<%= simple_form_for(@user) do |f| %>
+  <%= f.error_notification %>
 
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+  <div class="form-inputs">
+    <%= f.input :email %>
+    <%= f.input :first_name %>
+    <%= f.input :mid_name, label: "Middle Name" %>
+    <%= f.input :last_name %>
+    <%= f.association :designation, collection: Designation.order(:name) %><br>
+    <%= f.input :department %>
+    <%= f.association :project, collection: Project.order(:name) %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :role, collection: User::USER_ROLES %>
   </div>
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+  
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn btn-primary" %>
   </div>
-  <div class="field">
-    <%= f.label :mid_name %><br>
-    <%= f.text_field :mid_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :designation_id %><br>
-    <%= f.select :designation_id, Designation.order(:name).map { |s| [s.name, s.id] }, prompt: "Select Designation"  %>
-  </div>
-  <div class="field">
-    <%= f.label :department %><br>
-    <%= f.text_field :department %>
-  </div>
-  <div class="field">
-    <%= f.label :project_id %><br>
-    <%= f.select :project_id, Project.order(:name).map {|s| [s.name, s.id]}, prompt: "Select Project" %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </div>
-  <div class="field">
-    <%= f.label :role %><br>
-    <%= f.select :role, User::USER_ROLES, prompt: "Select User Role" %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  
 <% end %>

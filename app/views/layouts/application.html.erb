@@ -8,7 +8,8 @@
 </head>
 <body>
 <% if current_user %>
-<%= link_to "Logout #{current_user.email}", logout_path %>
+<%= link_to "Logout #{current_user.email}", logout_path, class: "pull-right" %>
+<%= link_to "Home", root_path %>
 <% end %>
 <%= yield %>
 

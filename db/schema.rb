@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161216094712) do
+ActiveRecord::Schema.define(version: 20161229122941) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -54,26 +54,24 @@ ActiveRecord::Schema.define(version: 20161216094712) do
     t.text     "description"
     t.string   "probability"
     t.string   "impact"
-    t.integer  "user_id"
+    t.integer  "created_by"
+    t.integer  "update_by"
     t.date     "target_date"
-    t.boolean  "status"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "status",      default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "risk_registers", ["project_id"], name: "index_risk_registers_on_project_id"
   add_index "risk_registers", ["risk_no"], name: "index_risk_registers_on_risk_no"
-  add_index "risk_registers", ["user_id"], name: "index_risk_registers_on_user_id"
 
-  create_table "risk_responsibilities", force: :cascade do |t|
-    t.integer  "risk_register_id"
-    t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+  create_table "risk_registers_users", force: :cascade do |t|
+    t.integer "risk_register_id"
+    t.integer "user_id"
   end
 
-  add_index "risk_responsibilities", ["risk_register_id"], name: "index_risk_responsibilities_on_risk_register_id"
-  add_index "risk_responsibilities", ["user_id"], name: "index_risk_responsibilities_on_user_id"
+  add_index "risk_registers_users", ["risk_register_id"], name: "index_risk_registers_users_on_risk_register_id"
+  add_index "risk_registers_users", ["user_id"], name: "index_risk_registers_users_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -91,5 +89,13 @@ ActiveRecord::Schema.define(version: 20161216094712) do
 
   add_index "users", ["designation_id"], name: "index_users_on_designation_id"
   add_index "users", ["project_id"], name: "index_users_on_project_id"
+
+  create_table "users_risk_registers", force: :cascade do |t|
+    t.integer "risk_register_id"
+    t.integer "user_id"
+  end
+
+  add_index "users_risk_registers", ["risk_register_id"], name: "index_users_risk_registers_on_risk_register_id"
+  add_index "users_risk_registers", ["user_id"], name: "index_users_risk_registers_on_user_id"
 
 end

@@ -39,6 +39,10 @@
     <%= f.label :target_date %><br>
     <%= f.date_select :target_date %>
   </div>
+  <div class="field">
+    <%= f.label :user_ids, "Risk Mitigators" %><br>
+    <%= f.select :user_ids, User.order(:email).map {|s| [s.email, s.id]}, {},{multiple: true, size: 5, class: "risk_mitigator" } %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
@@ -48,5 +52,6 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('.category').multiselect();  
+    $('.risk_mitigator').multiselect();  
   });
 </script>

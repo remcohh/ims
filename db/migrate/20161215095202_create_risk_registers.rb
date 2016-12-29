@@ -6,9 +6,10 @@ class CreateRiskRegisters < ActiveRecord::Migration
       t.text :description
       t.string :probability
       t.string :impact
-      t.references :user, index: true, foreign_key: true
+      t.integer :created_by
+      t.integer :update_by
       t.date :target_date
-      t.boolean :status
+      t.boolean :status, default: false
 
       t.timestamps null: false
     end
