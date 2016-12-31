@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-  get 'dashboard/index'
+  get 'dashboard' => 'dashboard#index'
 
   get 'session/new'
 
   resources :risk_mitigations
-  resources :risk_registers
   resources :categories
+  resources :projects do
+    resources :risk_registers
+  end
   resources :users
-  resources :projects
   resources :designations
   
   get 'login' => 'session#new'

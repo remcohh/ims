@@ -7,7 +7,7 @@ class CreateRiskRegisters < ActiveRecord::Migration
       t.string :probability
       t.string :impact
       t.integer :created_by
-      t.integer :update_by
+      t.integer :updated_by
       t.date :target_date
       t.boolean :status, default: false
 

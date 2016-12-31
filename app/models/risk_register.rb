@@ -6,9 +6,12 @@ class RiskRegister < ActiveRecord::Base
   RISK_IMPACT = ["High", "Medium", "Low"]
 
   has_and_belongs_to_many :categories
-  has_and_belongs_to_many :users 
+  has_and_belongs_to_many :users
+  belongs_to :creator, class_name: "User", foreign_key: "created_by"
+  belongs_to :updator, class_name: "User", foreign_key: "updated_by"
 
-  validates :project, :category_ids, presence: true
+  validates :project, :category_ids, :user_ids, presence: true
   validates :probability, inclusion: RISK_PROBABILITY
   validates :impact, inclusion: RISK_IMPACT
+
 end

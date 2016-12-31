@@ -1,11 +1,13 @@
 class RiskRegistersController < ApplicationController
   before_action :authorize
+  before_action :set_project
+  before_action :check_current_user_project
   before_action :set_risk_register, only: [:show, :edit, :update, :destroy]
 
   # GET /risk_registers
   # GET /risk_registers.json
   def index
-    @risk_registers = RiskRegister.all
+    @risk_registers = @project.risk_registers
   end
 
   # GET /risk_registers/1
@@ -15,7 +17,7 @@ class RiskRegistersController < ApplicationController
 
   # GET /risk_registers/new
   def new
-    @risk_register = RiskRegister.new
+    @risk_register = @project.risk_registers.build
   end
 
   # GET /risk_registers/1/edit
@@ -25,12 +27,12 @@ class RiskRegistersController < ApplicationController
   # POST /risk_registers
   # POST /risk_registers.json
   def create
-    @risk_register = RiskRegister.new(risk_register_params)
+    @risk_register = @project.risk_registers.build(risk_register_params)
     @risk_register.created_by = current_user.id
     
     respond_to do |format|
       if @risk_register.save
-        format.html { redirect_to @risk_register, notice: 'Risk register was successfully created.' }
+        format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully created.' }
         format.json { render :show, status: :created, location: @risk_register }
       else
         format.html { render :new }
@@ -42,9 +44,11 @@ class RiskRegistersController < ApplicationController
   # PATCH/PUT /risk_registers/1
   # PATCH/PUT /risk_registers/1.json
   def update
+    @risk_register.updated_by = current_user.id
+    
     respond_to do |format|
       if @risk_register.update(risk_register_params)
-        format.html { redirect_to @risk_register, notice: 'Risk register was successfully updated.' }
+        format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully updated.' }
         format.json { render :show, status: :ok, location: @risk_register }
       else
         format.html { render :edit }
@@ -65,12 +69,24 @@ class RiskRegistersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_project
+      @project = Project.find(params[:project_id])
+    end
+    
     def set_risk_register
-      @risk_register = RiskRegister.find(params[:id])
+      @risk_register = @project.risk_registers.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_register_params
       params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :target_date, :status, :category_ids => [], :user_ids => [])
+    end
+    
+    #verify the project to which the current user belongs to
+    def check_current_user_project
+      if current_user.project.id != params[:project_id].to_i && !sysadmin?
+        flash[:danger] = "You do not belong to #{@project.name} and hence you cannot access its risk register"
+        redirect_to dashboard_url 
+      end
     end
 end

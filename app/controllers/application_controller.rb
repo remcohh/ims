@@ -9,8 +9,18 @@ class ApplicationController < ActionController::Base
     redirect_to login_url unless current_user
   end
 
-  def only_admin
-    redirect_to root_url unless admin?
+  def only_sysadmin
+    unless admin?
+      flash[:danger] = "You are not authorized to access this page. Contact your Administrator"
+      redirect_to dashboard_url
+    end
+  end
+  
+  def only_sysadmin_corporate_rm #only sysadmin and corporate risk manager
+    unless sysadmin? || corporate_rm?
+      flash[:danger] = "You are not authorized to access this page. Contact Corporate Risk Manager"
+      redirect_to dashboard_url
+    end
   end
   
 end

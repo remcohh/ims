@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize
+  before_action :only_sysadmin_corporate_rm
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users

@@ -33,11 +33,6 @@
 </p>
 
 <p>
-  <strong>Created by:</strong>
-  <%= User.find(@risk_register.created_by).email %>
-</p>
-
-<p>
   <strong>Target date:</strong>
   <%= @risk_register.target_date %>
 </p>
@@ -48,11 +43,21 @@
 </p>
 
 <p>
+  <strong>Created by:</strong>
+  <%= @risk_register.creator.email %>
+</p>
+
+<p>
+  <strong>Updated by:</strong>
+  <%= @risk_register.updator.email if @risk_register.updator %>
+</p>
+
+<p>
   <strong>Risk Mitigators:</strong>
   <% @risk_register.users.each do |user| %>
     <%= user.email %>,
   <% end %>
 </p>
 
-<%= link_to 'Edit', edit_risk_register_path(@risk_register) %> |
-<%= link_to 'Back', risk_registers_path %>
+<%= link_to 'Edit', edit_project_risk_register_path(@project, @risk_register) %> |
+<%= link_to 'Back', project_risk_registers_path(@project) %>

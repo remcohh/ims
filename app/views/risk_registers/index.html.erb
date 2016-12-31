@@ -25,13 +25,13 @@
         <td><%= risk_register.description %></td>
         <td><%= risk_register.probability %></td>
         <td><%= risk_register.impact %></td>
-        <td><%= User.find(risk_register.created_by).email %></td> 
+        <td><%= risk_register.creator.email %></td> 
         <td><%= risk_register.target_date %></td>
         <td><%= risk_register.status %></td>
         <td>
-          <%= link_to 'Show', risk_register %>&nbsp;
-          <%= link_to 'Edit', edit_risk_register_path(risk_register) %>&nbsp;
-          <%= link_to 'Destroy', risk_register, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Show', project_risk_register_path(@project, risk_register) %>&nbsp;
+          <%= link_to 'Edit', edit_project_risk_register_path(@project, risk_register) %>&nbsp;
+          <%= link_to 'Destroy', project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
@@ -40,4 +40,4 @@
 
 <br>
 
-<%= link_to 'New Risk register', new_risk_register_path %>
+<%= link_to 'New Risk register', new_project_risk_register_path(@project) %>

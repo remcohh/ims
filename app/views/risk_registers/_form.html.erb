@@ -1,50 +1,17 @@
-<%= form_for(@risk_register) do |f| %>
-  <% if @risk_register.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@risk_register.errors.count, "error") %> prohibited this risk_register from being saved:</h2>
+<%= simple_form_for([@project, @risk_register]) do |f| %>
+  <%= f.error_notification %>
 
-      <ul>
-      <% @risk_register.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :risk_no %><br>
-    <%= f.text_field :risk_no %>
+  <div class="form-inputs">
+    <%= f.input :risk_no %>
+    <%= f.association :categories, input_html: { class: "category" }, label_html: { class: "block_label" } %>
+    <%= f.input :description %>
+    <%= f.input :probability, collection: RiskRegister::RISK_PROBABILITY, prompt: "Select Probability" %>
+    <%= f.input :impact, collection: RiskRegister::RISK_IMPACT, prompt: "Select Impact" %>
+    <%= f.association :users, collection: User.order(:email).map {|s| [s.email, s.id]}, input_html: { class: "risk_mitigator" }, label_html: { class: "block_label" }, label: "Risk Mitigators" %>
+    <%= f.input :target_date %>
   </div>
-  <div class="field">
-    <%= f.label :project_id %><br>
-    <%= f.select :project_id, Project.order(:name).map {|s| [s.name, s.id]}, prompt: "Select Project" %>
-  </div>
-  <div class="field">
-    <%= f.label :category_ids, "Category" %><br>
-    <%= f.select :category_ids, Category.order(:name).map {|s| [s.name, s.id]}, {},{multiple: true, size: 5, class: "category" } %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :probability %><br>
-    <%= f.select :probability, RiskRegister::RISK_PROBABILITY, prompt: "Select Probability" %>
-  </div>
-  <div class="field">
-    <%= f.label :impact %><br>
-    <%= f.select :impact, RiskRegister::RISK_IMPACT, prompt: "Select Impact" %>
-  </div>
-  <div class="field">
-    <%= f.label :target_date %><br>
-    <%= f.date_select :target_date %>
-  </div>
-  <div class="field">
-    <%= f.label :user_ids, "Risk Mitigators" %><br>
-    <%= f.select :user_ids, User.order(:email).map {|s| [s.email, s.id]}, {},{multiple: true, size: 5, class: "risk_mitigator" } %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.button :submit %>
   </div>
 <% end %>
 
