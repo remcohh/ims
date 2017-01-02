@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :designation, :department, :project, presence: true
 
   validates :role, inclusion: USER_ROLES.map {|s| s[1]}
+
 end

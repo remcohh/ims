@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+	before_destroy :check_users_risk_registers_count
+	
 	has_many :users
 	has_many :risk_registers
 	
@@ -7,5 +9,11 @@ class Project < ActiveRecord::Base
 	
 	def name=(str)
 		self[:name] = str.upcase
+	end
+	
+	def check_users_risk_registers_count
+		if users.count > 0 || risk_registers.count > 0
+			return false
+		end
 	end
 end

@@ -11,6 +11,7 @@
       <th>Designation</th>
       <th>Department</th>
       <th>Project</th>
+      <th>Role</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -24,10 +25,10 @@
         <td><%= user.designation.name %></td>
         <td><%= user.department %></td>
         <td><%= user.project.name %></td>
+        <td><%= check_user_role(user.role) %></td>
         <td>
-          <%= link_to 'Show', user %>&nbsp;
           <%= link_to 'Edit', edit_user_path(user) %>&nbsp;
-          <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } unless check_sysadmin_corporate_rm?(user) %>
         </td>
       </tr>
     <% end %>

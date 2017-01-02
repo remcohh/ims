@@ -55,10 +55,14 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
+    if @category.destroy
+      respond_to do |format|
+        format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:danger] = "Cannot delete category as it is being referenced by Risk Register table!!"
+      redirect_to categories_url
     end
   end
 

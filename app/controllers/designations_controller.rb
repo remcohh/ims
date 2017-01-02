@@ -55,10 +55,14 @@ class DesignationsController < ApplicationController
   # DELETE /designations/1
   # DELETE /designations/1.json
   def destroy
-    @designation.destroy
-    respond_to do |format|
-      format.html { redirect_to designations_url, notice: 'Designation was successfully destroyed.' }
-      format.json { head :no_content }
+    if @designation.destroy
+      respond_to do |format|
+        format.html { redirect_to designations_url, notice: 'Designation was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:danger] = "Cannot delete designation as it is being referenced by User table!!"
+      redirect_to designations_url
     end
   end
 

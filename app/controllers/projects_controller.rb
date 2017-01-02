@@ -55,10 +55,14 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
-    @project.destroy
-    respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
-      format.json { head :no_content }
+    if @project.destroy
+      respond_to do |format|
+        format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:danger] = "Cannot delete project as it is being referenced by User and Risk Register table!!"
+      redirect_to projects_url
     end
   end
 

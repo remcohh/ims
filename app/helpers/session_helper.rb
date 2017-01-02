@@ -26,4 +26,8 @@ module SessionHelper
   def user_name
     current_user.email if current_user
   end
+  
+  def check_sysadmin_corporate_rm?(user)
+    current_user == user || (current_user.role == 2 && user.role == 1)
+  end
 end
