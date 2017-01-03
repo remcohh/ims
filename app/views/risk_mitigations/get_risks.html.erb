@@ -1,0 +1,27 @@
+<h1>Listing Risks</h1>
+
+<table class="table table-condensed table-hover">
+  <thead>
+    <tr>
+      <th>Risk No</th>
+      <th>Risk Description</th>
+      <th>Target Date</th>
+      <th colspan="2"></th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @risk_registers.each do |risk_register| %>
+      <tr>
+        <td><%= risk_register.risk_no %></td>
+        <td><%= truncate(risk_register.description, length: 200) %></td>
+        <td><%= format_target_date(risk_register.target_date) %></td>
+        <td><%= link_to "Show Mitigation Steps", risk_mitigations_path(risk_id: risk_register.id) %></td>
+        <td><%= link_to 'Add Risk mitigation', new_risk_mitigation_path(risk_id: risk_register.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

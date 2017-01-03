@@ -1,11 +1,17 @@
 class RiskMitigationsController < ApplicationController
   before_action :authorize
+  before_action :set_risk_register, only: [:new, :index]
   before_action :set_risk_mitigation, only: [:show, :edit, :update, :destroy]
 
+  def get_risks
+    #retrieve all risks which the current_user is responsible for its mitigation
+    @risk_registers = @current_user.risk_registers
+  end
+  
   # GET /risk_mitigations
   # GET /risk_mitigations.json
   def index
-    @risk_mitigations = RiskMitigation.all
+    @risk_mitigations = @risk_register.risk_mitigations
   end
 
   # GET /risk_mitigations/1
@@ -15,7 +21,7 @@ class RiskMitigationsController < ApplicationController
 
   # GET /risk_mitigations/new
   def new
-    @risk_mitigation = RiskMitigation.new
+    @risk_mitigation = @risk_register.risk_mitigations.build
   end
 
   # GET /risk_mitigations/1/edit
@@ -29,7 +35,7 @@ class RiskMitigationsController < ApplicationController
 
     respond_to do |format|
       if @risk_mitigation.save
-        format.html { redirect_to @risk_mitigation, notice: 'Risk mitigation was successfully created.' }
+        format.html { redirect_to get_risks_path, notice: 'Risk mitigation was successfully created.' }
         format.json { render :show, status: :created, location: @risk_mitigation }
       else
         format.html { render :new }
@@ -64,6 +70,10 @@ class RiskMitigationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_risk_register
+      @risk_register = RiskRegister.find(params[:risk_id])
+    end
+    
     def set_risk_mitigation
       @risk_mitigation = RiskMitigation.find(params[:id])
     end

@@ -5,6 +5,7 @@ class RiskRegister < ActiveRecord::Base
   RISK_PROBABILITY = ["High", "Medium", "Low"]
   RISK_IMPACT = ["High", "Medium", "Low"]
 
+  has_many :risk_mitigations
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :users
   belongs_to :creator, class_name: "User", foreign_key: "created_by"

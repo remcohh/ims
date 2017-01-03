@@ -10,9 +10,7 @@
 
 <p>
   <strong>Category:</strong>
-  <% @risk_register.categories.each do |category| %>
-    <%= category.name %>,
-  <% end %>
+  <%= append_category_names(@risk_register.categories) %>
 </p>
 
 <p>
@@ -32,7 +30,7 @@
 
 <p>
   <strong>Target date:</strong>
-  <%= @risk_register.target_date %>
+  <%= format_target_date(@risk_register.target_date) %>
 </p>
 
 <p>
@@ -52,9 +50,7 @@
 
 <p>
   <strong>Risk Mitigators:</strong>
-  <% @risk_register.users.each do |user| %>
-    <%= user.email %>,
-  <% end %>
+  <%= append_mitigator_names(@risk_register.users) %>
 </p>
 
 <%= link_to 'Edit', edit_project_risk_register_path(@project, @risk_register) %> |

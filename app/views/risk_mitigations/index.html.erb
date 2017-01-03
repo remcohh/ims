@@ -1,29 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Risk Mitigations</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Risk register</th>
-      <th>Mitigation step</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @risk_mitigations.each do |risk_mitigation| %>
-      <tr>
-        <td><%= risk_mitigation.risk_register %></td>
-        <td><%= risk_mitigation.mitigation_step %></td>
-        <td><%= link_to 'Show', risk_mitigation %></td>
-        <td><%= link_to 'Edit', edit_risk_mitigation_path(risk_mitigation) %></td>
-        <td><%= link_to 'Destroy', risk_mitigation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Risk mitigation', new_risk_mitigation_path %>
+<h3>Risk No <%= @risk_register.risk_no %></h3>
+<p><strong>Category:</strong> <%= append_category_names(@risk_register.categories) %></p>
+<p><strong>Impact:</strong> <%= @risk_register.impact %></p>
+<p><strong>Probability:</strong> <%= @risk_register.probability %></p>
+<p><strong>Target Date:</strong> <%= format_target_date(@risk_register.target_date) %></p>
+<p><strong>Description:</strong> <%= @risk_register.description %></p>
+<h3>Mitigation Steps</h3>
+<p><strong>Mitigators:</strong> <%= append_mitigator_names(@risk_register.users) %></p>
+<ol>
+  <% @risk_mitigations.each do |risk_mitigation| %>
+  <li><%= risk_mitigation.mitigation_step %></li>
+  <% end %>
+</ol>
