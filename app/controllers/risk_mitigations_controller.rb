@@ -1,6 +1,6 @@
 class RiskMitigationsController < ApplicationController
   before_action :authorize
-  before_action :set_risk_register, only: [:new, :index]
+  before_action :set_risk_register, except: [:get_risks]
   before_action :set_risk_mitigation, only: [:show, :edit, :update, :destroy]
 
   def get_risks
@@ -31,11 +31,11 @@ class RiskMitigationsController < ApplicationController
   # POST /risk_mitigations
   # POST /risk_mitigations.json
   def create
-    @risk_mitigation = RiskMitigation.new(risk_mitigation_params)
+    @risk_mitigation = @risk_register.risk_mitigations.build(risk_mitigation_params)
 
     respond_to do |format|
       if @risk_mitigation.save
-        format.html { redirect_to get_risks_path, notice: 'Risk mitigation was successfully created.' }
+        format.html { redirect_to risk_register_risk_mitigations_url, notice: 'Risk mitigation was successfully created.' }
         format.json { render :show, status: :created, location: @risk_mitigation }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class RiskMitigationsController < ApplicationController
   def update
     respond_to do |format|
       if @risk_mitigation.update(risk_mitigation_params)
-        format.html { redirect_to @risk_mitigation, notice: 'Risk mitigation was successfully updated.' }
+        format.html { redirect_to risk_register_risk_mitigations_url, notice: 'Risk mitigation was successfully updated.' }
         format.json { render :show, status: :ok, location: @risk_mitigation }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class RiskMitigationsController < ApplicationController
   def destroy
     @risk_mitigation.destroy
     respond_to do |format|
-      format.html { redirect_to risk_mitigations_url, notice: 'Risk mitigation was successfully destroyed.' }
+      format.html { redirect_to risk_register_risk_mitigations_url, notice: 'Risk mitigation was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -71,7 +71,7 @@ class RiskMitigationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_risk_register
-      @risk_register = RiskRegister.find(params[:risk_id])
+      @risk_register = RiskRegister.find(params[:risk_register_id])
     end
     
     def set_risk_mitigation
@@ -80,6 +80,6 @@ class RiskMitigationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_mitigation_params
-      params.require(:risk_mitigation).permit(:risk_register_id, :mitigation_step)
+      params.require(:risk_mitigation).permit(:mitigation_step)
     end
 end

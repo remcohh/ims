@@ -62,7 +62,7 @@ class RiskRegistersController < ApplicationController
   def destroy
     @risk_register.destroy
     respond_to do |format|
-      format.html { redirect_to risk_registers_url, notice: 'Risk register was successfully destroyed.' }
+      format.html { redirect_to project_risk_registers_url, notice: 'Risk register was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

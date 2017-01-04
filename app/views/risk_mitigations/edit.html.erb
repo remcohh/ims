@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @risk_mitigation %> |
-<%= link_to 'Back', risk_mitigations_path %>
+<%= link_to 'Show', risk_register_risk_mitigation_path(@risk_register, @risk_mitigation) %> |
+<%= link_to 'Back', risk_register_risk_mitigations_path(@risk_register) %>
