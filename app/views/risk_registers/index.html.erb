@@ -27,7 +27,7 @@
         <td>
           <%= link_to 'Show', project_risk_register_path(@project, risk_register) %>&nbsp;
           <%= link_to 'Edit', edit_project_risk_register_path(@project, risk_register) %>&nbsp;
-          <%= link_to 'Destroy', project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Delete', project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

@@ -75,7 +75,7 @@ class RiskMitigationsController < ApplicationController
     end
     
     def set_risk_mitigation
-      @risk_mitigation = RiskMitigation.find(params[:id])
+      @risk_mitigation = @risk_register.risk_mitigations.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
