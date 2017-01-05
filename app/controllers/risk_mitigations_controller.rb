@@ -1,5 +1,6 @@
 class RiskMitigationsController < ApplicationController
   before_action :authorize
+  before_action :all_except_risk_viewer
   before_action :set_risk_register, except: [:get_risks]
   before_action :set_risk_mitigation, only: [:show, :edit, :update, :destroy]
 

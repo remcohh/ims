@@ -14,28 +14,32 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="<%= 'active' if controller.controller_name == 'dashboard' %>"><%= link_to "Dashboard", dashboard_path %></li>  
-        <% if sysadmin? || corporate_rm? %>
-          <li class="<%= 'active' if controller.controller_name == 'users' %>"><%= link_to "Users", users_path %></li>
-          <li class="<%= 'active' if controller.controller_name == 'designations' %>"><%= link_to "Designations", designations_path %></li>
-          <li class="<%= 'active' if controller.controller_name == 'projects' %>"><%= link_to "Projects", projects_path %></li>
+        <li class="<%= 'active' if controller.controller_name == 'dashboard' %>"><%= link_to "Dashboard", dashboard_path %></li>
+        
+        <% unless risk_viewer? %>
+          <% if sysadmin? || corporate_rm? %>
+            <li class="<%= 'active' if controller.controller_name == 'users' %>"><%= link_to "Users", users_path %></li>
+            <li class="<%= 'active' if controller.controller_name == 'designations' %>"><%= link_to "Designations", designations_path %></li>
+            <li class="<%= 'active' if controller.controller_name == 'projects' %>"><%= link_to "Projects", projects_path %></li>
+          <% end %>
+          
           <li class="<%= 'active' if controller.controller_name == 'categories' %>"><%= link_to "Categories", categories_path %></li>
-        <% end %>
-    
-        <% if sysadmin? %>  
-          <li class="<%= 'active' if controller.controller_name == 'risk_registers' %>">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risk Registers <span class="caret"></span></a>  
-            <ul class="dropdown-menu">
-              <% Project.all.each do |project| %>
+          
+          <% if sysadmin? %>  
+            <li class="<%= 'active' if controller.controller_name == 'risk_registers' %>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risk Registers <span class="caret"></span></a>  
+              <ul class="dropdown-menu">
+                <% Project.all.each do |project| %>
                   <li><%= link_to "#{project.name}", project_risk_registers_path(project) %></li>
-              <% end %>
-            </ul>
-          </li>
-        <% else %>
-          <li class="<%= 'active' if controller.controller_name == 'risk_registers' %>"><%= link_to "Risk Registers", project_risk_registers_path(current_user.project) %></li>
-        <% end %> 
+                <% end %>
+              </ul>
+            </li>
+          <% else %>
+            <li class="<%= 'active' if controller.controller_name == 'risk_registers' %>"><%= link_to "Risk Registers", project_risk_registers_path(current_user.project) %></li>
+          <% end %> 
     
-        <li class="<%= 'active' if controller.controller_name == 'risk_mitigations' %>"><%= link_to "Risk Mitigations", get_risks_path %></li>
+          <li class="<%= 'active' if controller.controller_name == 'risk_mitigations' %>"><%= link_to "Risk Mitigations", get_risks_path %></li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">

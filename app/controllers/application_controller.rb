@@ -23,4 +23,11 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  def all_except_risk_viewer
+    if risk_viewer?
+      flash[:danger] = "You are not authorized to access this page. Contact Corporate Risk Manager"
+      redirect_to dashboard_url
+    end
+  end
+  
 end

@@ -1,6 +1,7 @@
 class RiskRegistersController < ApplicationController
   before_action :authorize
   before_action :set_project
+  before_action :all_except_risk_viewer
   before_action :check_current_user_project
   before_action :set_risk_register, only: [:show, :edit, :update, :destroy]
 

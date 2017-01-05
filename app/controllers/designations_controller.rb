@@ -1,5 +1,6 @@
 class DesignationsController < ApplicationController
   before_action :authorize
+  before_action :only_sysadmin_corporate_rm
   before_action :set_designation, only: [:show, :edit, :update, :destroy]
 
   # GET /designations

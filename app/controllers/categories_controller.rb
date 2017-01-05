@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :authorize
+  before_action :all_except_risk_viewer
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories
