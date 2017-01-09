@@ -11,7 +11,7 @@ module RiskRegistersHelper
         category_array.join(", ")
     end
     
-    def append_mitigator_names(mitigators)
+    def append_mitigator_emails(mitigators)
         mitigator_array = []
         mitigators.each do |mitigator|
             mitigator_array.push(mitigator.email)

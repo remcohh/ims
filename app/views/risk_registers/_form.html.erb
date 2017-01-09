@@ -7,7 +7,8 @@
     <%= f.input :description %>
     <%= f.input :probability, collection: RiskRegister::RISK_PROBABILITY, prompt: "Select Probability" %>
     <%= f.input :impact, collection: RiskRegister::RISK_IMPACT, prompt: "Select Impact" %>
-    <%= f.association :users, collection: @project.users.order(:email).map {|s| [s.email, s.id]}, input_html: { class: "risk_mitigator" }, label_html: { class: "block_label" }, label: "Risk Mitigators" %>
+    <%= f.association :users, collection: @project.users.where.not(role: 5).order(:email).map {|s| [s.email, s.id]},
+            input_html: { class: "risk_mitigator" }, label_html: { class: "block_label" }, label: "Risk Mitigators" %>
     <%= f.input :target_date %>
   </div>
   <div class="form-actions">

@@ -50,7 +50,7 @@
 
 <p>
   <strong>Risk Mitigators:</strong>
-  <%= append_mitigator_names(@risk_register.users) %>
+  <%= append_mitigator_emails(@risk_register.users) %>
 </p>
 
 <%= link_to 'Edit', edit_project_risk_register_path(@project, @risk_register) %> |

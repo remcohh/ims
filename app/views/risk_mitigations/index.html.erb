@@ -5,7 +5,7 @@
 <p><strong>Target Date:</strong> <%= format_target_date(@risk_register.target_date) %></p>
 <p><strong>Description:</strong> <%= @risk_register.description %></p>
 <h3>Mitigation Steps</h3>
-<p><strong>Mitigators:</strong> <%= append_mitigator_names(@risk_register.users) %></p>
+<p><strong>Mitigators:</strong> <%= append_mitigator_emails(@risk_register.users) %></p>
 <p><%= link_to "Add Mitigations", new_risk_register_risk_mitigation_path, class: "btn btn-primary" %></p>
 <ol>
   <% @risk_mitigations.each do |risk_mitigation| %>

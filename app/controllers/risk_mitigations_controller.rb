@@ -2,6 +2,7 @@ class RiskMitigationsController < ApplicationController
   before_action :authorize
   before_action :all_except_risk_viewer
   before_action :set_risk_register, except: [:get_risks]
+  before_action :check_current_user_is_mitigator, except: [:get_risks]
   before_action :set_risk_mitigation, only: [:show, :edit, :update, :destroy]
 
   def get_risks
@@ -82,5 +83,12 @@ class RiskMitigationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_mitigation_params
       params.require(:risk_mitigation).permit(:mitigation_step)
+    end
+    
+    def check_current_user_is_mitigator
+      unless current_user.in? @risk_register.users.to_a
+        flash[:danger] = "You are not the risk mitigator for this risk and hence you cannot access it"
+        redirect_to get_risks_url
+      end
     end
 end
