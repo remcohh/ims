@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   end
   
   def User.get_project_rm(project)
-    User.where(project: project).collect { |user| user.email }
+    User.where("project_id = ? AND role = ?", project, 3).collect { |user| user.email }
   end
   
   private

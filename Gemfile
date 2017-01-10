@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'delayed_job_active_record'
 gem 'simple_form'
 
 gem 'bootstrap-multiselect-rails'

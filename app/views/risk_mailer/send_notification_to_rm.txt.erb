@@ -1,1 +1,5 @@
-A new risk has been created for <%= @risk_register.project.name %> bearing risk no <%= @risk_register.risk_no %>. Please visit NEEPCO Risk Management site to check it.
+A new risk has been created for <%= @risk_register.project.name %>. Please visit NEEPCO Risk Management site to check it.
+Risk No: <%= @risk_register.risk_no %>.
+Category: <%= append_category_names(@risk_register.categories) %>
+Impact: <%= @risk_register.impact %>
+Probability: <%= @risk_register.probability %>
