@@ -16,6 +16,14 @@ class User < ActiveRecord::Base
 
   validates :role, inclusion: USER_ROLES.map {|s| s[1]}
   
+  def User.get_corporate_rm
+    User.where(role: 2).collect { |user| user.email }
+  end
+  
+  def User.get_project_rm(project)
+    User.where(project: project).collect { |user| user.email }
+  end
+  
   private
   def check_user_references
     if risk_registers.count > 0 || risks.count > 0
