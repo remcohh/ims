@@ -14,9 +14,8 @@ class RiskMailer < ApplicationMailer
         @risk_register = risk_register
         mitigators = @risk_register.users.collect { |user| user.email }
         risk_managers = User.get_project_rm(@risk_register.project)
-        risk_managers << User.get_corporate_rm
         recipients = risk_managers - mitigators
-
+        recipients << User.get_corporate_rm
         mail(to: recipients, subject: "New Risk created for #{@risk_register.project.name}.")
     end
 end

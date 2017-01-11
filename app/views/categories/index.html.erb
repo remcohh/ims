@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Categories</h1>
+<%= render 'layouts/header', title: "Categories" %>
 
 <table class="table table-condensed table-bordered table-hover">
   <thead>
@@ -25,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Category', new_category_path %>
+<%= link_to 'New Category', new_category_path, class: "btn btn-primary" %>

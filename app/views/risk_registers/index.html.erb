@@ -1,4 +1,4 @@
-<h1>Listing Risk Registers, <%= @project.name %></h1>
+<%= render 'layouts/header', title: "Risk Register" %>
 
 <table class="table table-bordered">
   <thead>
@@ -36,4 +36,4 @@
 
 <br>
 
-<%= link_to 'New Risk register', new_project_risk_register_path(@project) %>
+<%= link_to 'New Risk register', new_project_risk_register_path(@project), class: "btn btn-primary" %>

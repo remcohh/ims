@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Designations</h1>
+<%= render 'layouts/header', title: "Designations" %>
 
 <table class="table table-bordered table-condensed table-hover">
   <thead>
@@ -25,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Designation', new_designation_path %>
+<%= link_to 'New Designation', new_designation_path, class: "btn btn-primary" %>

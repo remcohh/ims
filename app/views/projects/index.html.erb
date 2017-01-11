@@ -1,6 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Projects</h1>
+<%= render 'layouts/header', title: "Projects" %>
 
 <table class="table table-condensed table-bordered table-hover">
   <thead>
@@ -25,4 +23,4 @@
 
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<%= link_to 'New Project', new_project_path, class: "btn btn-primary" %>
