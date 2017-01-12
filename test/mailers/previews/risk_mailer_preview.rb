@@ -3,6 +3,9 @@ class RiskMailerPreview < ActionMailer::Preview
     def send_risk_notification
         RiskMailer.send_risk_notification(RiskRegister.find(13))
     end
+    def send_risk_reminder
+        RiskMailer.send_risk_reminder(RiskRegister.find(13))
+    end
     def send_notification_to_rm
         RiskMailer.send_notification_to_rm(RiskRegister.find(13))
     end

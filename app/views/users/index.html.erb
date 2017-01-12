@@ -1,5 +1,5 @@
 <%= render 'layouts/header', title: "Users" %>
-
+<p><%= link_to 'New User', new_user_path, class: "btn btn-primary" %></p>
 <table class="table table-bordered table-condensed table-hover">
   <thead>
     <tr>
@@ -32,7 +32,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New User', new_user_path, class: "btn btn-primary" %>

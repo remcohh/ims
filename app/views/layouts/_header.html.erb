@@ -11,6 +11,31 @@
           <li>
               <i class="fa fa-dashboard"></i> <a href="<%= root_path %>">Dashboard</a>
           </li>
+          
+          <% if controller.controller_name == "risk_mitigations" && controller.action_name != "get_risks" %>
+            <li><i class="fa fa-share"></i> <%= link_to "Risk Assignments", get_risks_path %></li>
+          <% end %>
+          
+          <% if controller.controller_name == "risk_registers" && controller.action_name != "index" %>
+            <li><i class="fa fa-share"></i> <%= link_to "Risk Register", project_risk_registers_path(@project) %></li>  
+          <% end %>
+          
+          <% if controller.controller_name == "categories" && controller.action_name != "index" %>
+            <li><i class="fa fa-share"></i> <%= link_to "Categories", categories_path %></li>  
+          <% end %>
+          
+          <% if controller.controller_name == "designations" && controller.action_name != "index" %>
+            <li><i class="fa fa-share"></i> <%= link_to "Designations", designations_path %></li>  
+          <% end %>
+          
+          <% if controller.controller_name == "projects" && controller.action_name != "index" %>
+            <li><i class="fa fa-share"></i> <%= link_to "Projects", projects_path %></li>  
+          <% end %>
+          
+          <% if controller.controller_name == "users" && controller.action_name != "index" %>
+            <li><i class="fa fa-share"></i> <%= link_to "Users", projects_path %></li>  
+          <% end %>
+          
           <% if controller.controller_name != 'dashboard' %>
             <li class="active">
                 <i class="fa fa-wrench"></i> <%= title %>

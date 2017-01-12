@@ -1,5 +1,7 @@
 <%= render 'layouts/header', title: "Categories" %>
 
+<p><%= link_to 'New Category', new_category_path, class: "btn btn-primary" %></p>
+
 <table class="table table-condensed table-bordered table-hover">
   <thead>
     <tr>
@@ -21,6 +23,5 @@
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Category', new_category_path, class: "btn btn-primary" %>
+

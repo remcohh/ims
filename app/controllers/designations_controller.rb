@@ -44,7 +44,7 @@ class DesignationsController < ApplicationController
   def update
     respond_to do |format|
       if @designation.update(designation_params)
-        format.html { redirect_to @designation, notice: 'Designation was successfully updated.' }
+        format.html { redirect_to designations_url, notice: 'Designation was successfully updated.' }
         format.json { render :show, status: :ok, location: @designation }
       else
         format.html { render :edit }

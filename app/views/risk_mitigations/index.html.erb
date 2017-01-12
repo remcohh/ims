@@ -1,5 +1,6 @@
+<%= render 'layouts/header', title: "Risk Mitigation Steps" %>
 
-<h3>Risk No <%= @risk_register.risk_no %></h3>
+<p><strong>Risk No:</strong> <%= @risk_register.risk_no %></p>
 <p><strong>Category:</strong> <%= append_category_names(@risk_register.categories) %></p>
 <p><strong>Impact:</strong> <%= @risk_register.impact %></p>
 <p><strong>Probability:</strong> <%= @risk_register.probability %></p>

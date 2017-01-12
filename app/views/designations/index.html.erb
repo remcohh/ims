@@ -1,5 +1,7 @@
 <%= render 'layouts/header', title: "Designations" %>
 
+<p><%= link_to 'New Designation', new_designation_path, class: "btn btn-primary" %></p>
+
 <table class="table table-bordered table-condensed table-hover">
   <thead>
     <tr>
@@ -21,6 +23,4 @@
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Designation', new_designation_path, class: "btn btn-primary" %>
