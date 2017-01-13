@@ -33,8 +33,8 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.save
-        RiskMailer.send_risk_notification(@risk_register).deliver #send email notification to mitigators
-        RiskMailer.send_notification_to_rm(@risk_register).deliver #send email notification to project & corporate risk manager 
+        RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
+        RiskMailer.delay.send_notification_to_rm(@risk_register) #send email notification to project & corporate risk manager 
         
         format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully created.' }
         format.json { render :show, status: :created, location: @risk_register }
@@ -52,7 +52,7 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.update(risk_register_params)
-        RiskMailer.send_risk_reminder(@risk_register).deliver #send email notification to mitigators
+        RiskMailer.delay.send_risk_reminder(@risk_register) #send email notification to mitigators
         
         format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully updated.' }
         format.json { render :show, status: :ok, location: @risk_register }

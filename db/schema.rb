@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170110121249) do
+ActiveRecord::Schema.define(version: 20170113060202) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170110121249) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "full_name"
   end
 
   create_table "risk_mitigations", force: :cascade do |t|

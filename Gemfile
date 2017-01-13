@@ -1,7 +1,8 @@
 source 'http://rubygems.org'
 
+#for sending mail in background
+gem 'daemons'
 gem 'delayed_job_active_record'
-gem 'simple_form'
 
 gem 'bootstrap-multiselect-rails'
 #bootstrap gems
@@ -9,6 +10,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 #font-awesome-rails
 
 gem "font-awesome-rails"
+gem 'simple_form'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'

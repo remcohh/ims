@@ -30,7 +30,7 @@ class DesignationsController < ApplicationController
 
     respond_to do |format|
       if @designation.save
-        format.html { redirect_to @designation, notice: 'Designation was successfully created.' }
+        format.html { redirect_to designations_url, notice: 'Designation was successfully created.' }
         format.json { render :show, status: :created, location: @designation }
       else
         format.html { render :new }
