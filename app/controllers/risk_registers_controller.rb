@@ -85,7 +85,7 @@ class RiskRegistersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_register_params
-      params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :target_date, :status, :category_ids => [], :user_ids => [])
+      params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :target_date, :status, :mitigation_plan, :category_ids => [], :user_ids => [])
     end
     
     #verify the project to which the current user belongs to
