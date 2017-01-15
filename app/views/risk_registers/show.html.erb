@@ -55,5 +55,10 @@
   <%= append_mitigator_emails(@risk_register.users) %>
 </p>
 
+<p>
+  <strong>Mitigation Plan:</strong>
+  <%= @risk_register.mitigation_plan %>
+</p>
+
 <%= link_to 'Edit', edit_project_risk_register_path(@project, @risk_register) %> |
 <%= link_to 'Back', project_risk_registers_path(@project) %>

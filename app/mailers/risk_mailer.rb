@@ -17,9 +17,7 @@ class RiskMailer < ApplicationMailer
     
     def send_notification_to_rm(risk)
         @risk = risk
-        mitigators = @risk.users.collect { |user| user.email }
-        risk_managers = User.get_project_rm(@risk.project)
-        recipients = risk_managers - mitigators #exclude project managers who are also risk mitigator for the risk.
+        recipients = User.get_project_rm(@risk.project)
         recipients << User.get_corporate_rm
         mail(to: recipients, subject: "New Risk created for #{@risk.project.name}.")
     end

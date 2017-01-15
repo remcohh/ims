@@ -1,5 +1,8 @@
 source 'http://rubygems.org'
 
+#datepicker gem
+gem 'bootstrap-datepicker-rails'
+
 #for sending mail in background
 gem 'daemons'
 gem 'delayed_job_active_record'

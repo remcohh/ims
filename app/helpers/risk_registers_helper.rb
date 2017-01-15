@@ -18,4 +18,20 @@ module RiskRegistersHelper
         end
         mitigator_array.join(", ")
     end
+    
+    def two_digit(value)
+        if value < 9
+            '0' + value.to_s
+        else
+            value.to_s
+        end
+    end
+    
+    def get_year_yy
+        Date.today.strftime("%Y").last(2)
+    end
+    
+    def increment_by_one_s(value)
+        (value + 1).to_s
+    end
 end

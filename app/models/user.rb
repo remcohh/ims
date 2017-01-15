@@ -16,12 +16,16 @@ class User < ActiveRecord::Base
 
   validates :role, inclusion: USER_ROLES.map {|s| s[1]}
   
-  def User.get_corporate_rm
+  def User.get_corporate_rm #get corporate risk managers
     User.where(role: 2).collect { |user| user.email }
   end
   
-  def User.get_project_rm(project)
+  def User.get_project_rm(project) #get specific project risk managers
     User.where("project_id = ? AND role = ?", project, 3).collect { |user| user.email }
+  end
+  
+  def User.risk_manager_exist?(project) #check if any corporate or risk manager exists
+    User.get_corporate_rm.any? || User.get_project_rm(project).any?
   end
   
   private

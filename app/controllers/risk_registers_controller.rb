@@ -34,7 +34,7 @@ class RiskRegistersController < ApplicationController
     respond_to do |format|
       if @risk_register.save
         RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
-        RiskMailer.delay.send_notification_to_rm(@risk_register) #send email notification to project & corporate risk manager 
+        RiskMailer.delay.send_notification_to_rm(@risk_register) if User.risk_manager_exist?(@project) #send email notification to project & corporate risk manager 
         
         format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully created.' }
         format.json { render :show, status: :created, location: @risk_register }
@@ -85,7 +85,7 @@ class RiskRegistersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_register_params
-      params.require(:risk_register).permit(:risk_no, :project_id, :description, :probability, :impact, :target_date, :status, :mitigation_plan, :category_ids => [], :user_ids => [])
+      params.require(:risk_register).permit(:description, :probability, :impact, :target_date, :status, :mitigation_plan, :category_ids => [], :user_ids => [])
     end
     
     #verify the project to which the current user belongs to
