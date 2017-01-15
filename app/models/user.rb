@@ -12,8 +12,7 @@ class User < ActiveRecord::Base
   USER_ROLES = [["SysAdmin", 1], ["Corporate Risk Manager", 2], ["Project Risk Manager", 3], ["Risk Creator", 4], ["Risk Viewer", 5]]
 
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }, uniqueness: {case_sensitive: false}
-  validates :first_name, :last_name, :designation, :department, :project, presence: true
-
+  validates :first_name, :last_name, :designation, :department, :project, :email, :role, presence: true
   validates :role, inclusion: USER_ROLES.map {|s| s[1]}
   
   def User.get_corporate_rm #get corporate risk managers
