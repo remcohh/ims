@@ -6,7 +6,7 @@ class DesignationsController < ApplicationController
   # GET /designations
   # GET /designations.json
   def index
-    @designations = Designation.all
+    @designations = Designation.order(:name).paginate(page: params[:page], per_page: 12)
   end
 
   # GET /designations/1

@@ -6,7 +6,6 @@
   <thead>
     <tr>
       <th>Risk No</th>
-      <th>Project</th>
       <th>Description</th>
       <th>Probability</th>
       <th>Impact</th>
@@ -19,7 +18,6 @@
     <% @risk_registers.each do |risk_register| %>
       <tr>
         <td><%= risk_register.risk_no %></td>
-        <td><%= risk_register.project.name %></td>
         <td><%= truncate(risk_register.description, length: 180) %></td>
         <td><%= risk_register.probability %></td>
         <td><%= risk_register.impact %></td>

@@ -41,6 +41,16 @@
                 <i class="fa fa-wrench"></i> <%= title %>
             </li>
           <% end %>
+          
+          <% if controller.controller_name == "risk_registers" %>
+            <li class="pull-right">
+              <i class="fa fa-building"></i> <%= @project.name %>
+            </li>
+          <% elsif controller.controller_name == "risk_mitigations" %>
+            <li class="pull-right">
+              <i class="fa fa-building"></i> <%= current_user.project.name %>
+            </li>
+          <% end %>
       </ol>
   </div>
 </div>

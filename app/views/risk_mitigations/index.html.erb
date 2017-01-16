@@ -1,11 +1,14 @@
 <%= render 'layouts/header', title: "Risk Mitigation Steps" %>
-
-<p><strong>Risk No:</strong> <%= @risk_register.risk_no %></p>
+<p><div class="row">
+  <div class="col-sm-2"><strong>Risk No:</strong> <%= @risk_register.risk_no %></div>
+  <div class="col-sm-2"><strong>Impact:</strong> <%= @risk_register.impact %></div>
+  <div class="col-sm-2"><strong>Probability:</strong> <%= @risk_register.probability %></div>
+  <div class="col-sm-4"><strong>Target Date:</strong> <%= format_target_date(@risk_register.target_date) %></div>
+</div></p>
 <p><strong>Category:</strong> <%= append_category_names(@risk_register.categories) %></p>
-<p><strong>Impact:</strong> <%= @risk_register.impact %></p>
-<p><strong>Probability:</strong> <%= @risk_register.probability %></p>
-<p><strong>Target Date:</strong> <%= format_target_date(@risk_register.target_date) %></p>
 <p><strong>Description:</strong> <%= @risk_register.description %></p>
+<p><strong>Mitigation Plan:</strong> <%= @risk_register.mitigation_plan %></p>
+
 <h3>Mitigation Steps</h3>
 <p><strong>Mitigators:</strong> <%= append_mitigator_emails(@risk_register.users) %></p>
 <p><%= link_to "Add Mitigations", new_risk_register_risk_mitigation_path, class: "btn btn-primary" %></p>
