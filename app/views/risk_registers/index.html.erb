@@ -2,15 +2,16 @@
 
 <p><%= link_to 'New Risk', new_project_risk_register_path(@project), class: "btn btn-primary" %></p>
 
-<table class="table table-bordered">
-  <thead>
+<table class="table table-bordered table-condensed">
+  <thead class="row">
     <tr>
-      <th>Risk No</th>
-      <th>Description</th>
-      <th>Probability</th>
-      <th>Impact</th>
-      <th>Target Date</th>
-      <th>Actions</th>
+      <th class="col-sm-1">Risk No</th>
+      <th class="col-sm-6">Description</th>
+      <th class="col-sm-1">Probability</th>
+      <th class="col-sm-1">Impact</th>
+      <th class="col-sm-1">Target Date</th>
+      <th class="col-sm-2">Actions</th>
+      </div>
     </tr>
   </thead>
 
@@ -18,14 +19,14 @@
     <% @risk_registers.each do |risk_register| %>
       <tr>
         <td><%= risk_register.risk_no %></td>
-        <td><%= truncate(risk_register.description, length: 180) %></td>
+        <td><%= truncate(risk_register.description, length: 160) %></td>
         <td><%= risk_register.probability %></td>
         <td><%= risk_register.impact %></td>
         <td><%= format_target_date(risk_register.target_date) %></td>
         <td>
-          <%= link_to 'Show', project_risk_register_path(@project, risk_register) %>&nbsp;
-          <%= link_to 'Edit', edit_project_risk_register_path(@project, risk_register) %>&nbsp;
-          <%= link_to 'Delete', project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <a href="<%= project_risk_register_path(@project, risk_register) %>"><i class="fa fa-search"></i> Show</a>&nbsp;
+          <a href="<%= edit_project_risk_register_path(@project, risk_register) %>"><i class="fa fa-edit"></i> Edit</a>&nbsp;
+          <%= link_to '<i class="fa fa-times"></i> Delete'.html_safe, project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

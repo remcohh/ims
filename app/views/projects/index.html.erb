@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-lg-8 col-sm-12 col-md-10">
     <%= render 'layouts/header', title: "Projects" %>
     
     <p><%= link_to 'New Project', new_project_path, class: "btn btn-primary" %></p>
@@ -7,9 +7,9 @@
     <table class="table table-condensed table-bordered table-hover">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Full Name & Location</th>
-          <th>Actions</th>
+          <th class="col-sm-4">Name</th>
+          <th class="col-sm-6">Full Name & Location</th>
+          <th class="col-sm-2">Actions</th>
         </tr>
       </thead>
     
@@ -19,8 +19,8 @@
             <td><%= project.name %></td>
             <td><%= project.full_name %></td>
             <td>
-              <%= link_to 'Edit', edit_project_path(project) %>&nbsp;
-              <%= link_to 'Delete', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to '<i class="fa fa-edit"></i> Edit'.html_safe, edit_project_path(project) %>&nbsp;
+              <%= link_to '<i class="fa fa-times"></i> Delete'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
         <% end %>

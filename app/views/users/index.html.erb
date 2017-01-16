@@ -25,8 +25,8 @@
         <td><%= user.project.name %></td>
         <td><%= check_user_role(user.role) %></td>
         <td>
-          <%= link_to 'Edit', edit_user_path(user) %>&nbsp;
-          <%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } unless check_sysadmin_corporate_rm?(user) %>
+          <%= link_to '<i class="fa fa-edit"></i> Edit'.html_safe, edit_user_path(user) %>&nbsp;
+          <%= link_to '<i class="fa fa-times"></i> Delete'.html_safe, user, method: :delete, data: { confirm: 'Are you sure?' } unless check_sysadmin_corporate_rm?(user) %>
         </td>
       </tr>
     <% end %>

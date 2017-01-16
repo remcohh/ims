@@ -7,8 +7,8 @@
     <table class="table table-bordered table-condensed table-hover">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Actions</th>
+          <th class="col-sm-9">Name</th>
+          <th class="col-sm-3">Actions</th>
         </tr>
       </thead>
     
@@ -17,8 +17,8 @@
           <tr>
             <td><%= designation.name %></td>
             <td>
-              <%= link_to 'Edit', edit_designation_path(designation) %>&nbsp;
-              <%= link_to 'Delete', designation, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to '<i class="fa fa-edit"></i> Edit'.html_safe, edit_designation_path(designation) %>&nbsp;
+              <%= link_to '<i class="fa fa-times"></i> Delete'.html_safe, designation, method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
         <% end %>
