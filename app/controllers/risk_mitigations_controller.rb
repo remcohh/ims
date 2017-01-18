@@ -10,6 +10,23 @@ class RiskMitigationsController < ApplicationController
     @risk_registers = @current_user.risk_registers
   end
   
+  #Update risk status
+  def update_status
+    if @risk_register.status?
+      if @risk_register.update_attribute(:status, false)
+        respond_to do |format|
+          format.js { render :layout => false }
+        end
+      end
+    else
+      if @risk_register.update_attribute(:status, true)
+        respond_to do |format|
+          format.js { render :layout => false }
+        end
+      end
+    end
+  end
+  
   # GET /risk_mitigations
   # GET /risk_mitigations.json
   def index

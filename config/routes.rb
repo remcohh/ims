@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   post 'login' => 'session#create'
   get 'logout' => 'session#destroy'
   get 'get_risks' => "risk_mitigations#get_risks"
+  get 'update_status' => "risk_mitigations#update_status"
 
   root 'dashboard#index'
 end
