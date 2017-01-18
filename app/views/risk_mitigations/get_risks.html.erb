@@ -18,7 +18,7 @@
         <td><%= truncate(risk_register.description, length: 180) %></td>
         <td><%= format_target_date(risk_register.target_date) %></td>
         <td><span class="<%= mitigation_status_class(risk_register) %> status"><%= mitigation_status(risk_register) %></span></td>
-        <td><%= link_to "<i class='fa fa-search'></i> Mitigation Steps".html_safe, risk_register_risk_mitigations_path(risk_register) %></td>
+        <td><%= link_to "<i class='fa fa-info-circle'></i> Mitigation Steps".html_safe, risk_register_risk_mitigations_path(risk_register) %></td>
       </tr>
     <% end %>
   </tbody>

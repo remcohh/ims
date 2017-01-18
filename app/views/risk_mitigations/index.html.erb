@@ -15,7 +15,7 @@
               id: "update_status", class: "#{button_class(@risk_register)}", remote: :true %>
 </p>
 
-<h3>Mitigation Steps</h3>
+<h3 id="heading">Mitigation Steps</h3>
 <p><strong>Mitigators:</strong> <%= append_mitigator_emails(@risk_register.users) %></p>
 <p><%= link_to "Add Mitigations", new_risk_register_risk_mitigation_path, class: "btn btn-primary" %></p>
 <ol id="mitigation_steps">
