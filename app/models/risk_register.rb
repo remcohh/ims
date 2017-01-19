@@ -12,7 +12,7 @@ class RiskRegister < ActiveRecord::Base
   belongs_to :creator, class_name: "User", foreign_key: "created_by"
   belongs_to :updator, class_name: "User", foreign_key: "updated_by"
 
-  validates :project, :description, :target_date, :category_ids, :user_ids, presence: true
+  validates :project, :description, :target_date, :category_ids, :user_ids, :responsible_officer, presence: true
   validates :probability, inclusion: RISK_PROBABILITY
   validates :impact, inclusion: RISK_IMPACT
   validates :risk_no, uniqueness: true

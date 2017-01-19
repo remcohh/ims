@@ -37,7 +37,12 @@
 
 <p>
   <strong>Status:</strong>
-  <%= @risk_register.status %>
+  <%= mitigation_status(@risk_register) %>
+</p>
+
+<p>
+  <strong>Responsible Officer:</strong>
+  <%= @risk_register.responsible_officer %>
 </p>
 
 <p>

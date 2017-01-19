@@ -3,7 +3,7 @@ module RiskMitigationsHelper
         if risk.status?
             "Completed"
         else
-            "Incomplete"
+            "Pending"
         end
     end
     def mitigation_status_class(risk)

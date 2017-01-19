@@ -33,10 +33,10 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.save
-        RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
-        RiskMailer.delay.send_notification_to_rm(@risk_register) if User.risk_manager_exist?(@project) #send email notification to project & corporate risk manager 
+        #RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
+        #RiskMailer.delay.send_notification_to_rm(@risk_register) if User.risk_manager_exist?(@project) #send email notification to project & corporate risk manager 
         
-        format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully created.' }
+        format.html { redirect_to [@project, @risk_register], notice: "Risk with Risk No. #{@risk_register.risk_no} was successfully created." }
         format.json { render :show, status: :created, location: @risk_register }
       else
         format.html { render :new }
@@ -52,9 +52,9 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.update(risk_register_params)
-        RiskMailer.delay.send_risk_reminder(@risk_register) #send email notification to mitigators
+        #RiskMailer.delay.send_risk_reminder(@risk_register) #send email notification to mitigators
         
-        format.html { redirect_to [@project, @risk_register], notice: 'Risk register was successfully updated.' }
+        format.html { redirect_to [@project, @risk_register], notice: "Risk with Risk No. #{@risk_register.risk_no} was successfully updated." }
         format.json { render :show, status: :ok, location: @risk_register }
       else
         format.html { render :edit }
@@ -85,14 +85,16 @@ class RiskRegistersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def risk_register_params
-      params.require(:risk_register).permit(:description, :probability, :impact, :target_date, :status, :mitigation_plan, :category_ids => [], :user_ids => [])
+      params.require(:risk_register).permit(:responsible_officer, :probability, :impact, :description, :target_date, :status, :mitigation_plan, :category_ids => [], :user_ids => [])
     end
     
     #verify the project to which the current user belongs to
     def check_current_user_project
-      if current_user.project.id != params[:project_id].to_i && !sysadmin?
-        flash[:danger] = "You do not belong to #{@project.name} and hence you cannot access its risk register"
-        redirect_to dashboard_url 
+      if current_user.project.id != params[:project_id].to_i
+        unless (sysadmin? || corporate_rm?)
+          flash[:danger] = "You do not belong to #{@project.name} and hence you cannot access its risk register"
+          redirect_to dashboard_url 
+        end
       end
     end
 end
