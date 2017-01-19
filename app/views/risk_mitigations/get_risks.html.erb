@@ -1,5 +1,24 @@
 <%= render 'layouts/header', title: "Risk Assignments" %>
 
+<div class="row">
+  <div class="col-sm-6 col-md-5">
+    <%= form_tag get_risks_path, :method => 'get' do %>
+      <div class="row">
+        <div class="col-sm-8 col-md-6">
+          <%= text_field_tag :risk_no,
+                params[:risk_no], class: "form-control",
+                placeholder: "Risk No" %>
+        </div>
+        <div class="col-sm-4 col-md-6">
+          <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<br/>
+
 <table class="table table-condensed table-hover">
   <thead>
     <tr>

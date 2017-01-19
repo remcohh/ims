@@ -7,7 +7,7 @@ class RiskMitigationsController < ApplicationController
 
   def get_risks
     #retrieve all risks which the current_user is responsible for its mitigation
-    @risk_registers = @current_user.risk_registers
+    @risk_registers = @current_user.risk_registers.search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
   end
   
   #Update risk status

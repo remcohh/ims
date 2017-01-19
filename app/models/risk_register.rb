@@ -17,6 +17,14 @@ class RiskRegister < ActiveRecord::Base
   validates :impact, inclusion: RISK_IMPACT
   validates :risk_no, uniqueness: true
   
+  def self.search(risk_no)
+		if risk_no
+		  self.where(['risk_no LIKE ?', "%#{risk_no}%"])
+		else
+		  self.all
+		end
+  end
+  
   private
   #generate unique risk no based on 2-digit project code, 2-digit year, and 4-digit autoincrement integer
   def generate_risk_no

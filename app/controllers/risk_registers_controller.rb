@@ -8,7 +8,7 @@ class RiskRegistersController < ApplicationController
   # GET /risk_registers
   # GET /risk_registers.json
   def index
-    @risk_registers = @project.risk_registers
+    @risk_registers = @project.risk_registers.search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
   end
 
   # GET /risk_registers/1
