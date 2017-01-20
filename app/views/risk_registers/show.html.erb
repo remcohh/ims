@@ -65,5 +65,22 @@
   <%= @risk_register.mitigation_plan %>
 </p>
 
-<%= link_to 'Edit', edit_project_risk_register_path(@project, @risk_register) %> |
-<%= link_to 'Back', project_risk_registers_path(@project) %>
+<% if @risk_register.approved? %>
+  <p>
+    <strong>Approved by:</strong>
+    <%= @risk_register.approver.email %>
+  </p>
+  <p>
+    <strong>Approved date:</strong>
+    <%= @risk_register.approved_date %>
+  </p>
+<% else %>
+  <% if admin_or_risk_manager? %>
+    <p><%= link_to 'Approve', project_approve_risk_register_path(@project, risk_no: @risk_register.id), class: "btn btn-primary" %></p>
+  <% end %>
+<% end %>
+
+<% unless @risk_register.approved? %>
+  <%= link_to 'Edit', edit_project_risk_register_path(@project, @risk_register) %> |
+  <%= link_to 'Back', project_risk_registers_path(@project) %>
+<% end %>

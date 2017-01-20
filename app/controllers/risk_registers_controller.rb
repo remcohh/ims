@@ -4,19 +4,20 @@ class RiskRegistersController < ApplicationController
   before_action :all_except_risk_viewer
   before_action :check_current_user_project
   before_action :set_risk_register, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_risk_register_approved?, only: [:edit, :update, :destroy]
+  
   # GET /risk_registers
   # GET /risk_registers.json
   def index #get approved list
     @risk_registers = @project.risk_registers.where(approved: false).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
   end
 
-  def approved_list #get unapproved risk list
-     @risk_registers = @project.risk_registers.where(approved: true, status: true).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+  def approved_list #get approved risk list
+     @risk_registers = @project.risk_registers.where(approved: true).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
   end
   
   def completed_list #get completed risk list
-    @risk_registers = @project.risk_registers.where(status: true).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    @risk_registers = @project.risk_registers.where(status: true, approved: true).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
   end
 
   # GET /risk_registers/1
@@ -70,6 +71,17 @@ class RiskRegistersController < ApplicationController
       end
     end
   end
+  
+  def approve
+    @risk = @project.risk_registers.find(params[:risk_no])
+    respond_to do |format|
+      if @risk.update_attributes({approved: true, approved_by: current_user.id, approved_date: Date.today })
+        format.html { redirect_to project_approved_list_url(@project), notice: "Risk with Risk No. #{@risk.risk_no} was successfully approved." }
+      else
+        format.html { redirect_to project_risk_registers_url(@project) }
+      end
+    end
+  end
 
   # DELETE /risk_registers/1
   # DELETE /risk_registers/1.json
@@ -101,8 +113,16 @@ class RiskRegistersController < ApplicationController
       if current_user.project.id != params[:project_id].to_i
         unless (sysadmin? || corporate_rm?)
           flash[:danger] = "You do not belong to #{@project.name} and hence you cannot access its risk register"
-          redirect_to dashboard_url 
+          redirect_to project_risk_registers_url(current_user.project) 
         end
+      end
+    end
+    
+    #check if risk_register has been approved  
+    def check_risk_register_approved?
+      if @risk_register.approved?
+        flash[:danger] = "Risk No. #{@risk_register.risk_no} has already been Approved."
+        redirect_to project_risk_registers_url(@project)
       end
     end
 end

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :risk_registers
     get 'completed_list' => 'risk_registers#completed_list'
     get 'approved_list' => "risk_registers#approved_list"
+    get 'approve_risk_register' => 'risk_registers#approve'
   end
   resources :risk_registers, only: [] do
     resources :risk_mitigations    

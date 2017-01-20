@@ -11,6 +11,7 @@ class RiskRegister < ActiveRecord::Base
   belongs_to :project
   belongs_to :creator, class_name: "User", foreign_key: "created_by"
   belongs_to :updator, class_name: "User", foreign_key: "updated_by"
+  belongs_to :approver, class_name: "User", foreign_key: "approved_by"
 
   validates :project, :description, :target_date, :category_ids, :user_ids, :responsible_officer, presence: true
   validates :probability, inclusion: RISK_PROBABILITY
