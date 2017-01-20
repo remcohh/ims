@@ -1,1 +1,0 @@
-json.array! @risk_registers, partial: 'risk_registers/risk_register', as: :risk_register

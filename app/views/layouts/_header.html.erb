@@ -16,8 +16,8 @@
             <li><i class="fa fa-share"></i> <%= link_to "Risk Assignments", get_risks_path %></li>
           <% end %>
           
-          <% if controller.controller_name == "risk_registers" && controller.action_name != "index" %>
-            <li><i class="fa fa-share"></i> <%= link_to "Risk Register", project_risk_registers_path(@project) %></li>  
+          <% if controller.controller_name == "risk_registers" && controller.action_name != "approved_list" && controller.action_name != "index" && controller.action_name != "completed_list"%>
+            <li><i class="fa fa-share"></i> <%= link_to "Risk Register", project_approved_list_path(@project) %></li>  
           <% end %>
           
           <% if controller.controller_name == "categories" && controller.action_name != "index" %>

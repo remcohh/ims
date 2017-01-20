@@ -78,9 +78,9 @@ ActiveRecord::Schema.define(version: 20170119102704) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.text     "mitigation_plan"
-    t.boolean  "authorised",          default: false
-    t.integer  "authorised_by"
-    t.date     "authorised_date"
+    t.boolean  "approved",            default: false
+    t.integer  "approved_by"
+    t.date     "approved_date"
     t.string   "responsible_officer"
   end
 

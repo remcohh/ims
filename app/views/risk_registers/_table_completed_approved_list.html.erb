@@ -1,0 +1,28 @@
+<table class="table table-bordered table-condensed">
+  <thead class="row">
+    <tr>
+      <th class="col-sm-1">Risk No</th>
+      <th class="col-sm-7">Description</th>
+      <th class="col-sm-1">Probability</th>
+      <th class="col-sm-1">Impact</th>
+      <th class="col-sm-1">Target Date</th>
+      <th class="col-sm-1">Actions</th>
+      </div>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @risk_registers.each do |risk_register| %>
+      <tr>
+        <td><%= risk_register.risk_no %></td>
+        <td><%= truncate(risk_register.description, length: 160) %></td>
+        <td><%= risk_register.probability %></td>
+        <td><%= risk_register.impact %></td>
+        <td><%= format_target_date(risk_register.target_date) %></td>
+        <td>
+          <a href="<%= project_risk_register_path(@project, risk_register) %>"><i class="fa fa-search"></i> Show</a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

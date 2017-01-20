@@ -26,12 +26,12 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risk Register <span class="caret"></span></a>  
               <ul class="dropdown-menu">
                 <% Project.all.each do |project| %>
-                  <li><%= link_to "#{project.name}", project_risk_registers_path(project) %></li>
+                  <li><%= link_to "#{project.name}", project_approved_list_path(project) %></li>
                 <% end %>
               </ul>
             </li>
           <% else %>
-            <li class="<%= 'active' if controller.controller_name == 'risk_registers' %>"><%= link_to "Risk Register", project_risk_registers_path(current_user.project) %></li>
+            <li class="<%= 'active' if controller.controller_name == 'risk_registers' %>"><%= link_to "Risk Register", project_approved_list_path(current_user.project) %></li>
           <% end %> 
     
           <li class="<%= 'active' if controller.controller_name == 'risk_mitigations' %>"><%= link_to "Risk Mitigation", get_risks_path %></li>

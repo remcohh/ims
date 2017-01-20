@@ -1,0 +1,28 @@
+<%= render 'layouts/header', title: "Risk Register" %>
+
+<div class="row">
+  <div class="col-sm-12">
+    <%= link_to 'New Risk', new_project_risk_register_path(@project), class: "btn btn-primary" %>
+  </div>
+</div>
+
+<div class="row" id="panel-header">
+  <div class="col-sm-6 col-md-7">
+    <%= render 'risk_registers/navtabs' %>
+  </div>
+  <div class="col-sm-6 col-md-5">
+    <% if controller.action_name == 'index' %>
+      <%= render 'risk_registers/search_unapproved_risk_form' %>
+    <% elsif controller.action_name == 'completed_list' %>
+      <%= render 'risk_registers/search_completed_risk_form' %>
+    <% elsif controller.action_name == 'approved_list' %>
+      <%= render 'risk_registers/search_approved_risk_form' %>
+    <% end %>
+  </div>
+</div>
+
+<% if controller.action_name == 'approved_list' || controller.action_name == 'completed_list' %>
+  <%= render 'risk_registers/table_completed_approved_list' %>
+<% elsif controller.action_name == 'index' %>
+  <%= render 'risk_registers/table_unapproved_list' %>
+<% end %>
