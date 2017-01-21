@@ -1,0 +1,47 @@
+<%= render 'layouts/header', title: "Risk Mitigations" %>
+
+<div class="row" id="panel-header">
+  <div class="col-sm-6 col-md-7">
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="<%= 'active' if controller.action_name == 'pending_list' %>">
+            <a href="<%= mitigation_pending_list_path %>">Pending List</a>
+        </li>
+        <li role="presentation" class="<%= 'active' if controller.action_name == 'completed_list' %>">
+            <a href="<%= mitigation_completed_list_path %>">Completed List</a>
+        </li>
+    </ul>
+  </div>
+  <div class="col-sm-6 col-md-5">
+    <% if controller.action_name == 'pending_list' %>
+      <%= render 'risk_mitigations/search_mitigation_pending_list_form' %>
+    <% elsif controller.action_name == 'completed_list' %>
+      <%= render 'risk_mitigations/search_mitigation_completed_list_form' %>
+    <% end %>
+  </div>
+</div>
+
+<table class="table table-condensed table-hover table-bordered">
+  <thead>
+    <tr>
+      <th class="col-sm-1">Risk No</th>
+      <th class="col-sm-7">Risk Description</th>
+      <th class="col-sm-1">Target Date</th>
+      <th class="col-sm-1">Status</th>
+      <th class="col-sm-3">Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @risk_registers.each do |risk_register| %>
+      <tr>
+        <td><%= risk_register.risk_no %></td>
+        <td><%= truncate(risk_register.description, length: 180) %></td>
+        <td><%= format_target_date(risk_register.target_date) %></td>
+        <td><span class="<%= mitigation_status_class(risk_register) %> status"><%= mitigation_status(risk_register) %></span></td>
+        <td><%= link_to "<i class='fa fa-info-circle'></i> Mitigation Steps".html_safe, risk_register_risk_mitigations_path(risk_register) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

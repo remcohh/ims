@@ -11,7 +11,7 @@
 
 <p>
   <strong>Status:</strong>&nbsp;
-  <%= link_to mitigation_status(@risk_register), update_status_path(risk_register_id: @risk_register.id), 
+  <%= link_to mitigation_status(@risk_register), risk_register_update_status_path(@risk_register), 
               id: "update_status", class: "#{button_class(@risk_register)}", remote: :true %>
 </p>
 

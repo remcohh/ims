@@ -1,13 +1,18 @@
 class RiskMitigationsController < ApplicationController
   before_action :authorize
   before_action :all_except_risk_viewer
-  before_action :set_risk_register, except: [:get_risks]
-  before_action :check_current_user_is_mitigator, except: [:get_risks]
+  before_action :set_risk_register, except: [:pending_list, :completed_list]
+  before_action :check_current_user_is_mitigator, except: [:pending_list, :completed_list]
   before_action :set_risk_mitigation, only: [:show, :edit, :update, :destroy]
 
-  def get_risks
+  def pending_list
     #retrieve all risks which the current_user is responsible for its mitigation
-    @risk_registers = @current_user.risk_registers.where(approved: true).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    @risk_registers = @current_user.risk_registers.where(approved: true, status: false).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+  end
+  
+  def completed_list
+    #retrieve all completed risks which the current_user is responsible for its mitigation
+    @risk_registers = @current_user.risk_registers.where(approved: true, status: true).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
   end
   
   #Update risk status

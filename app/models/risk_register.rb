@@ -17,6 +17,7 @@ class RiskRegister < ActiveRecord::Base
   validates :probability, inclusion: RISK_PROBABILITY
   validates :impact, inclusion: RISK_IMPACT
   validates :risk_no, uniqueness: true
+  validate :check_date
   
   def self.search(risk_no)
 		if risk_no
@@ -36,5 +37,12 @@ class RiskRegister < ActiveRecord::Base
       last_risk_id = pro.risk_registers.last.risk_no.last(4).to_i
     end
     self[:risk_no] = two_digit(project.id) + get_year_yy + increment_by_one_s(last_risk_id)
+  end
+  
+  #check if target date is greater than today's date
+  def check_date
+    if target_date.present? && target_date < Date.today
+      errors.add(:target_date, "should be greater than today's date")
+    end
   end
 end

@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     get 'approve_risk_register' => 'risk_registers#approve'
   end
   resources :risk_registers, only: [] do
-    resources :risk_mitigations    
+    resources :risk_mitigations
+    get 'update_status' => "risk_mitigations#update_status"
   end
   resources :users
   resources :designations
@@ -19,8 +20,8 @@ Rails.application.routes.draw do
   get 'login' => 'session#new'
   post 'login' => 'session#create'
   get 'logout' => 'session#destroy'
-  get 'get_risks' => "risk_mitigations#get_risks"
-  get 'update_status' => "risk_mitigations#update_status"
+  get 'mitigation_pending_list' => "risk_mitigations#pending_list"
+  get 'mitigation_completed_list' => "risk_mitigations#completed_list"
   
   root 'dashboard#index'
 end

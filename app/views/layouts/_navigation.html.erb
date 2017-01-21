@@ -34,7 +34,7 @@
             <li class="<%= 'active' if controller.controller_name == 'risk_registers' %>"><%= link_to "Risk Register", project_approved_list_path(current_user.project) %></li>
           <% end %> 
     
-          <li class="<%= 'active' if controller.controller_name == 'risk_mitigations' %>"><%= link_to "Risk Mitigation", get_risks_path %></li>
+          <li class="<%= 'active' if controller.controller_name == 'risk_mitigations' %>"><%= link_to "Risk Mitigation", mitigation_pending_list_path %></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
