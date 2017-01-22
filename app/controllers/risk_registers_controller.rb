@@ -42,7 +42,7 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.save
-        RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
+        #RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
         RiskMailer.delay.send_notification_to_rm(@risk_register) if User.risk_manager_exist?(@project) #send email notification to project & corporate risk manager 
         
         format.html { redirect_to [@project, @risk_register], notice: "Risk with Risk No. #{@risk_register.risk_no} was successfully created." }
@@ -61,7 +61,7 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.update(risk_register_params)
-        RiskMailer.delay.send_risk_reminder(@risk_register) #send email notification to mitigators
+        #RiskMailer.delay.send_risk_reminder(@risk_register) #send email notification to mitigators
         
         format.html { redirect_to [@project, @risk_register], notice: "Risk with Risk No. #{@risk_register.risk_no} was successfully updated." }
         format.json { render :show, status: :ok, location: @risk_register }
@@ -73,12 +73,19 @@ class RiskRegistersController < ApplicationController
   end
   
   def approve
-    @risk = @project.risk_registers.find(params[:risk_no])
+    @risk_register = @project.risk_registers.find(params[:risk_no])
     respond_to do |format|
-      if @risk.update_attributes({approved: true, approved_by: current_user.id, approved_date: Date.today })
-        format.html { redirect_to project_approved_list_url(@project), notice: "Risk with Risk No. #{@risk.risk_no} was successfully approved." }
+      if @risk_register.update_attributes({approved: true, approved_by: current_user.id, approved_date: Date.today })
+        RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
+        format.html { 
+          flash[:success] = "Risk with Risk No. #{@risk_register.risk_no} was successfully approved."
+          redirect_to project_approved_list_url(@project)
+        }
       else
-        format.html { redirect_to project_risk_registers_url(@project) }
+        format.html { 
+          flash[:danger] = "Couldn't approve Risk #{@risk_register.risk_no}. Please contact Corporate Risk Manager"
+          redirect_to project_risk_registers_url(@project) 
+        }
       end
     end
   end

@@ -15,7 +15,7 @@
     <% @risk_registers.each do |risk_register| %>
       <tr>
         <td><%= risk_register.risk_no %></td>
-        <td><%= truncate(risk_register.description, length: 200) %></td>
+        <td><%= truncate(risk_register.description, length: 180) %></td>
         <td><%= risk_register.probability %></td>
         <td><%= risk_register.impact %></td>
         <td><%= format_target_date(risk_register.target_date) %></td>
