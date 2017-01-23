@@ -2,7 +2,7 @@
 
 <div class="row" id="button-row">
   <div class="col-sm-12">
-    <%= link_to "Add Mitigation", new_risk_register_risk_mitigation_path, class: "btn btn-primary btn-sm" %>
+    <%= link_to "Add Mitigation", new_risk_register_risk_mitigation_path, class: "btn btn-primary btn-sm" %>&nbsp;
     <%= link_to "Change Status", risk_register_update_status_path(@risk_register), 
               id: "update_status", class: "#{button_class(@risk_register)}", remote: :true %>
   </div>            
@@ -40,7 +40,7 @@
           <div class="col-sm-10">
             <ul class="nav">
               <% @risk_register.categories.each do |category| %>
-                <span class="label label-primary"><%= category.name %></span>
+                <span class="label label-default"><%= category.name %></span>
               <% end %>
             </ul>
           </div>
@@ -54,7 +54,7 @@
           <div class="col-sm-10"><%= @risk_register.mitigation_plan %></div>
         </div>
         <div class="row">
-          <div class="col-sm-2"><span class="name">Mitigators:</span></div>
+          <div class="col-sm-2"><span class="name">Risk Mitigators:</span></div>
           <div class="col-sm-10">
             <ol>
               <% @risk_register.users.each do |user| %>
