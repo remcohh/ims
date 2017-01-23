@@ -3,24 +3,39 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #general_info {
-	margin-top: 10px;
-	margin-botom: 5px;
+	margin-top: 5px;
+	font-family: 'PT Serif', serif;
 	
-	.name {
-		font-weight: bold;
-		color: #000;
-		font-size: 13px;
+	ol {
+		padding-left: 15px;
+		li {
+			padding-left: 15px;
+		}
 	}
-	.row {
-		margin-bottom: 5px;
+	.name {
+		font-weight: 600;
+		color: #111;
+		font-size: 13px;
 	}
 	.panel-heading {
 		padding-top: 4px;
 		padding-bottom: 4px;
 	}
 	.panel-body {
-		padding-top: 6px;
-		padding-bottom: 6px;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	.risk_detail {
+		.panel-body{
+			padding-top: 7px;
+		}
+		.row {
+			margin-bottom: 5px;
+		}
+	}
+	.label {
+		font-size: 12px;
+		font-family: 'serif';
 	}
 }
 

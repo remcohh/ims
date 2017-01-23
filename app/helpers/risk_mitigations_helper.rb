@@ -8,9 +8,9 @@ module RiskMitigationsHelper
     end
     def mitigation_status_class(risk)
         if risk.status?
-            "completed"
+            "label label-success"
         else
-            "pending"
+            "label label-danger"
         end
     end
 

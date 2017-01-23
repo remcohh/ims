@@ -1,7 +1,8 @@
 class RiskRegistersController < ApplicationController
   before_action :authorize
-  before_action :set_project
+  before_action :only_sysadmin_and_risk_manager, only: [:approve]
   before_action :all_except_risk_viewer
+  before_action :set_project
   before_action :check_current_user_project
   before_action :set_risk_register, only: [:show, :edit, :update, :destroy]
   before_action :check_risk_register_approved?, only: [:edit, :update, :destroy]
