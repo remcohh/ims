@@ -29,7 +29,7 @@
     }
 }
 
-#panel-header {
+#nav-header {
     margin-top: 10px;
     .nav {
         padding-bottom: 12px;
@@ -38,4 +38,49 @@
 
 .table {
     font-size: 13px;
+}
+
+#general_info {
+	margin-top: 5px;
+	font-family: 'PT Serif', serif;
+	
+	ol {
+		padding-left: 15px;
+		li {
+			padding-left: 15px;
+		}
+	}
+	.name {
+		font-weight: 600;
+		color: #111;
+		font-size: 13px;
+	}
+	.panel-heading {
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+	.panel-body {
+		padding-top: 5px;
+		padding-bottom: 8px;
+	}
+	.risk_detail {
+		.panel-body{
+			padding-top: 7px;
+		}
+		.row {
+			margin-bottom: 5px;
+		}
+	}
+	.label {
+		font-size: 12px;
+		font-family: 'serif';
+	}
+}
+
+#print-icon {
+	margin-top: -10px;
+	margin-bottom: 10px;
+	a {
+		text-decoration: none;
+	}
 }

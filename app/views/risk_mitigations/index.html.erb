@@ -1,34 +1,83 @@
 <%= render 'layouts/header', title: "Risk Mitigation Steps" %>
-<p><div class="row">
-  <div class="col-sm-2"><strong>Risk No:</strong> <%= @risk_register.risk_no %></div>
-  <div class="col-sm-2"><strong>Impact:</strong> <%= @risk_register.impact %></div>
-  <div class="col-sm-2"><strong>Probability:</strong> <%= @risk_register.probability %></div>
-  <div class="col-sm-4"><strong>Target Date:</strong> <%= format_target_date(@risk_register.target_date) %></div>
-</div></p>
-<p><strong>Category:</strong> <%= append_category_names(@risk_register.categories) %></p>
-<p><strong>Description:</strong> <%= @risk_register.description %></p>
-<p><strong>Mitigation Plan:</strong> <%= @risk_register.mitigation_plan %></p>
 
-<p>
-  <strong>Status:</strong>&nbsp;
-  <%= link_to mitigation_status(@risk_register), risk_register_update_status_path(@risk_register), 
+<div class="row" id="button-row">
+  <div class="col-sm-12">
+    <%= link_to "Add Mitigation", new_risk_register_risk_mitigation_path, class: "btn btn-primary btn-sm" %>
+    <%= link_to "Change Status", risk_register_update_status_path(@risk_register), 
               id: "update_status", class: "#{button_class(@risk_register)}", remote: :true %>
-</p>
+  </div>            
+</div>
 
-<h3 id="heading">Mitigation Steps</h3>
-<p><strong>Mitigators:</strong> <%= append_mitigator_emails(@risk_register.users) %></p>
-<p><%= link_to "Add Mitigations", new_risk_register_risk_mitigation_path, class: "btn btn-primary" %></p>
-<ol id="mitigation_steps">
-  <% @risk_mitigations.each do |risk_mitigation| %>
-  <div class="row">
-    <li>
-      <div class="col-sm-10"><%= risk_mitigation.mitigation_step %></div>
-      <div class="col-sm-2">
-        <%= link_to "Edit", edit_risk_register_risk_mitigation_path(@risk_register, risk_mitigation) %>&nbsp;
-        <%= link_to "Delete", risk_register_risk_mitigation_path(@risk_register, risk_mitigation),
-                     method: :delete, data: { confirm: 'Are you sure?' } %>
+<div id="general_info" class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">General Info</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Risk No</span></div>
+          <div class="col-sm-2"><span class="name">Project</span></div>
+          <div class="col-sm-2"><span class="name">Probability</span></div>
+          <div class="col-sm-2"><span class="name">Impact</span></div>
+          <div class="col-sm-2"><span class="name">Target Date</span></div>
+          <div class="col-sm-2"><span class="name">Status</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><%= @risk_register.risk_no %></div>
+          <div class="col-sm-2"><%= @risk_register.project.name %></div>
+          <div class="col-sm-2"><%= @risk_register.probability %></div>
+          <div class="col-sm-2"><%= @risk_register.impact %></div>
+          <div class="col-sm-2"><%= format_target_date(@risk_register.target_date) %></div>
+          <div class="col-sm-2"><span class="<%= mitigation_status_class(@risk_register) %>" id="status"><%= mitigation_status(@risk_register) %></span></div>
+        </div>
       </div>
-    </li>
-  </div>  
-  <% end %>
-</ol>
+    </div>
+    
+    <div class="panel panel-default risk_detail">
+      <div class="panel-heading">Risk Detail</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Categories:</span></div>
+          <div class="col-sm-10">
+            <ul class="nav">
+              <% @risk_register.categories.each do |category| %>
+                <span class="label label-primary"><%= category.name %></span>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Risk Description:</span></div>
+          <div class="col-sm-10"><%= @risk_register.description %></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Mitigation Plan:</span></div>
+          <div class="col-sm-10"><%= @risk_register.mitigation_plan %></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Mitigators:</span></div>
+          <div class="col-sm-10">
+            <ol>
+              <% @risk_register.users.each do |user| %>
+                <li><%= user_info(user) + ", " + user.email %></li>
+              <% end %>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <% if @risk_register.risk_mitigations.count > 0 %>
+      <div class="panel panel-default mitigation_step" >
+        <div class="panel-heading">Mitigation Steps</div>
+        <div class="panel-body">
+          <ol>
+            <% @risk_register.risk_mitigations.each do |mitigation| %>
+              <li><%= mitigation.mitigation_step %></li>
+            <% end %>
+          </ol>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

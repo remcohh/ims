@@ -16,9 +16,9 @@ module RiskMitigationsHelper
 
     def button_class(risk)
         if(risk.status?)
-            "btn btn-success"
+            "btn btn-success btn-sm"
         else
-            "btn btn-danger"
+            "btn btn-danger btn-sm"
         end
     end
 end

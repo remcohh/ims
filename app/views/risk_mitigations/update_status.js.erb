@@ -1,5 +1,7 @@
 $('#update_status').bind('ajax:success', function(){
-  $(this).text("<%= mitigation_status(@risk_register) %>");
   $(this).removeClass();
   $(this).addClass('<%= button_class(@risk_register) %>');
+  $('#status').removeClass();
+  $('#status').text('<%= mitigation_status(@risk_register) %>');
+  $('#status').addClass('<%= mitigation_status_class(@risk_register) %>');
 });

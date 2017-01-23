@@ -2,14 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.status {
-    font-size: 12px;
-    text-align: center;
-    padding: 5px 10px;
-    color: white;
-    border-radius: 3px;
-}
-
 .completed {
     background: #2ecc71;
 }
@@ -18,10 +10,6 @@
     background: #e74c3c;
 }
 
-#mitigation_steps li {
-    margin: 10px 0px;
-}
-
-#heading {
-    font-size: 20px;
+#button-row {
+    margin-bottom: 15px;
 }
