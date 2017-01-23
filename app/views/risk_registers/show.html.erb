@@ -1,86 +1,77 @@
 <%= render 'layouts/header', title: "Show Risk" %>
 
-<p>
-  <strong>Risk no:</strong>
-  <%= @risk_register.risk_no %>
-</p>
-
-<p>
-  <strong>Project:</strong>
-  <%= @risk_register.project.name %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= append_category_names(@risk_register.categories) %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @risk_register.description %>
-</p>
-
-<p>
-  <strong>Probability:</strong>
-  <%= @risk_register.probability %>
-</p>
-
-<p>
-  <strong>Impact:</strong>
-  <%= @risk_register.impact %>
-</p>
-
-<p>
-  <strong>Target date:</strong>
-  <%= format_target_date(@risk_register.target_date) %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= mitigation_status(@risk_register) %>
-</p>
-
-<p>
-  <strong>Responsible Officer:</strong>
-  <%= @risk_register.responsible_officer %>
-</p>
-
-<p>
-  <strong>Created by:</strong>
-  <%= @risk_register.creator.email %>
-</p>
-
-<p>
-  <strong>Updated by:</strong>
-  <%= @risk_register.updator.email if @risk_register.updator %>
-</p>
-
-<p>
-  <strong>Risk Mitigators:</strong>
-  <%= append_mitigator_emails(@risk_register.users) %>
-</p>
-
-<p>
-  <strong>Mitigation Plan:</strong>
-  <%= @risk_register.mitigation_plan %>
-</p>
-
-<% if @risk_register.approved? %>
-  <p>
-    <strong>Approved by:</strong>
-    <%= @risk_register.approver.email %>
-  </p>
-  <p>
-    <strong>Approved date:</strong>
-    <%= @risk_register.approved_date %>
-  </p>
-<% else %>
+<% if !@risk_register.approved? %>
   <% if admin_or_risk_manager? %>
-    <p><%= link_to 'Approve', project_approve_risk_register_path(@project, risk_no: @risk_register.id), class: "btn btn-primary" %></p>
+    <div class="row">
+      <div class="col-sm-12"><%= link_to 'Approve', project_approve_risk_register_path(@project, risk_no: @risk_register.id), class: "btn btn-primary" %></div>
+    </div>
   <% end %>
 <% end %>
 
-<% unless @risk_register.approved? %>
-  <%= link_to 'Edit', edit_project_risk_register_path(@project, @risk_register) %> |
-  <%= link_to 'Back', project_risk_registers_path(@project) %>
-<% end %>
+<div id="general_info" class="row">
+  <div class="col-sm-12 col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">General Info</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Risk No</span></div>
+          <div class="col-sm-2"><span class="name">Probability</span></div>
+          <div class="col-sm-2"><span class="name">Project</span></div>
+          <div class="col-sm-2"><span class="name">Impact</span></div>
+          <div class="col-sm-2"><span class="name">Target Date</span></div>
+          <div class="col-sm-2"><span class="name">Status</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><%= @risk_register.risk_no %></div>
+          <div class="col-sm-2"><%= @risk_register.probability %></div>
+          <div class="col-sm-2"><%= @risk_register.project.name %></div>
+          <div class="col-sm-2"><%= @risk_register.impact %></div>
+          <div class="col-sm-2"><%= format_target_date(@risk_register.target_date) %></div>
+          <div class="col-sm-2"><%= mitigation_status(@risk_register) %></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">User Info</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Responsible Officer</span></div>
+          <div class="col-sm-2"><span class="name">Approved Date</span></div>
+          <div class="col-sm-2"><span class="name">Approved by</span></div>
+          <div class="col-sm-3"><span class="name">Created by</span></div>
+          <div class="col-sm-3"><span class="name">Updated by</span></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><%= @risk_register.responsible_officer %></div>
+          <div class="col-sm-2"><%= format_target_date(@risk_register.approved_date) %></div>
+          <div class="col-sm-2"><%= user_info(@risk_register.approver) %></div>
+          <div class="col-sm-3"><%= user_info(@risk_register.creator) %></div>
+          <div class="col-sm-3"><%= user_info(@risk_register.updator) %></div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading">Risk Detail</div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Categories:</span></div>
+          <div class="col-sm-10"><%= append_category_names(@risk_register.categories) %></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Risk Description:</span></div>
+          <div class="col-sm-10"><%= @risk_register.description %></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Mitigators:</span></div>
+          <div class="col-sm-10"><%= append_mitigator_emails(@risk_register.users) %></div>
+        </div>
+        <div class="row">
+          <div class="col-sm-2"><span class="name">Mitigation Plan:</span></div>
+          <div class="col-sm-10"><%= @risk_register.mitigation_plan %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,10 @@
 module RiskRegistersHelper
     def format_target_date(date)
-        date.strftime("%d-%m-%Y")
+        if date
+            date.strftime("%d-%m-%Y")
+        else
+            "N/A"
+        end
     end
     
     def append_category_names(categories)
@@ -33,5 +37,15 @@ module RiskRegistersHelper
     
     def increment_by_one_s(value)
         (value + 1).to_s
+    end
+    
+    def user_info(user)
+        if user
+            name =  user.first_name + " " + user.last_name
+            designation = user.designation.name
+            name + ", " + designation
+        else
+            "N/A"
+        end
     end
 end
