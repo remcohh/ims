@@ -4,4 +4,9 @@ $('#update_status').bind('ajax:success', function(){
   $('#status').removeClass();
   $('#status').text('<%= mitigation_status(@risk_register) %>');
   $('#status').addClass('<%= mitigation_status_class(@risk_register) %>');
+  <% if @risk_register.status? %>
+    $('.show-btn').hide();
+  <% else %>
+    $('.show-btn').show();
+  <% end %>
 });

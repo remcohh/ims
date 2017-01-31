@@ -1,7 +1,7 @@
 module RiskRegistersHelper
     def format_target_date(date)
         if date
-            date.strftime("%d-%m-%Y")
+            date.strftime("%d-%b-%Y")
         else
             "N/A"
         end

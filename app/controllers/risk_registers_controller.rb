@@ -10,15 +10,15 @@ class RiskRegistersController < ApplicationController
   # GET /risk_registers
   # GET /risk_registers.json
   def index #get unapproved list
-    @risk_registers = @project.risk_registers.where(approved: false).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    @risk_registers = @project.risk_registers.where(approved: false).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
 
   def approved_list #get approved risk list
-     @risk_registers = @project.risk_registers.where(approved: true, status: false).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+     @risk_registers = @project.risk_registers.where(approved: true, status: false).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
   
   def completed_list #get completed risk list
-    @risk_registers = @project.risk_registers.where(status: true, approved: true).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 12)
+    @risk_registers = @project.risk_registers.where(status: true, approved: true).search(params[:risk_no]).order("created_at DESC").paginate(page: params[:page], per_page: 10)
   end
 
   # GET /risk_registers/1

@@ -1,9 +1,37 @@
 <%= render 'layouts/header' %>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Risks with High Probability & High Impact</h3>
+    <h3 class="panel-title">Critical Risks</h3>
   </div>
   <div class="panel-body">
-    Place Risks here.....
+    <table class="table table-bordered table-condensed">
+  <thead class="row">
+    <tr>
+      <th class="col-sm-1">Risk No</th>
+      <th class="col-sm-4">Description</th>
+      <th class="col-sm-1">Probability</th>
+      <th class="col-sm-1">Impact</th>
+      <th class="col-sm-1">Responsible Officer</th>
+      <th class="col-sm-3">Mitigation Plan</th>
+      <th class="col-sm-1">Target Date</th>
+      
+     </tr>
+  </thead>
+
+  <tbody>
+    <% @risk_registers.each do |risk_register| %>
+      <tr>
+        <td><%= risk_register.risk_no %></td>
+        <td><%= truncate(risk_register.description, length: 180) %></td>
+        <td><%= risk_register.probability %></td>
+        <td><%= risk_register.impact %></td>
+        <td><%=risk_register.responsible_officer %></td>
+        <td><%=risk_register.mitigation_plan %></td>
+        <td><%= format_date(risk_register.target_date) %></td>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
   </div>
 </div>
