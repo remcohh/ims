@@ -1,3 +1,38 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.warning-status, .warning-status a {
+    background: #e67e22;
+    color: #fff;
+}
+.danger-status, .danger-status a {
+    background: #c0392b;
+    color: #fff;
+}
+
+.default-status, .default-status a {
+    color: #222;
+}
+
+.warning-status a:hover, .danger-status a:hover, .default-status a:hover {
+    text-decoration: none;
+    color: #2c3e50;
+}
+
+#status-label li {
+    font-size: 12px;
+    padding: 4px 10px; 
+    border-radius: 3px;
+}
+
+#status-label {
+    .warning-info {
+        background: #e67e22;
+        color: white;
+    }
+    .danger-info {
+        background: #c0392b;
+        color: white;
+    }
+}

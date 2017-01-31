@@ -27,6 +27,14 @@ class RiskRegister < ActiveRecord::Base
 		end
   end
   
+  def self.project_wise(project)
+		if project.to_i > 0
+		  self.where(project_id: project)
+		else
+		  self.all
+		end
+  end
+  
   private
   #generate unique risk no based on 2-digit project code, 2-digit year, and 4-digit autoincrement integer
   def generate_risk_no
