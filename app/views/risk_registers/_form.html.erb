@@ -3,13 +3,13 @@
 
   <div class="form-inputs">
     <div class="row">
-      <div class="col-sm-4"><%= f.input :responsible_officer %></div>
+      <div class="col-sm-4"><%= f.input :responsible_officer, collection: @project.get_project_rm_list, prompt: "-- Select --", label: "Responsible Officer" %></div>
       <div class="col-sm-8"><%= f.association :categories, input_html: { class: "category" }, label_html: { class: "block_label" } %></div>
     </div>
     
     <div class="row">
-      <div class="col-sm-4"><%= f.input :probability, collection: RiskRegister::RISK_PROBABILITY, prompt: "Select Probability" %></div>
-      <div class="col-sm-4"><%= f.input :impact, collection: RiskRegister::RISK_IMPACT, prompt: "Select Impact" %></div>
+      <div class="col-sm-4"><%= f.input :probability, collection: RiskRegister::RISK_PROBABILITY, prompt: "-- Select --" %></div>
+      <div class="col-sm-4"><%= f.input :impact, collection: RiskRegister::RISK_IMPACT, prompt: "-- Select --" %></div>
     </div>
     
     <div class="row">
@@ -23,7 +23,7 @@
     </div>
     
     <div class="row">
-      <div class="col-md-10"><%= f.input :mitigation_plan %></div>
+      <div class="col-md-10"><%= f.input :mitigation_plan, label: "Mitigation Plan" %></div>
     </div>
     
   </div>

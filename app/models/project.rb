@@ -15,8 +15,16 @@ class Project < ActiveRecord::Base
 		self[:full_name] = str.split().each { |s| s.capitalize! }.join(' ')
 	end
 	
+	def get_project_rm_list
+		users.where(role: 3).order(:email).map do |s|
+			[s.first_name+" "+s.last_name+", "+s.designation.name, s.id] 
+		end
+	end
+	
 	def get_mitigator_list
-		users.where.not(role: 5).order(:email).map {|s| [s.email, s.id]}
+		users.where.not(role: 5).order(:email).map do |s| 
+			[s.first_name+" "+s.last_name+", "+s.designation.name+", "+s.email, s.id] 
+		end	
 	end
 	
 	private

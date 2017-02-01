@@ -79,9 +79,8 @@ ActiveRecord::Schema.define(version: 20170119102704) do
     t.datetime "updated_at",                          null: false
     t.text     "mitigation_plan"
     t.boolean  "approved",            default: false
-    t.integer  "approved_by"
     t.date     "approved_date"
-    t.string   "responsible_officer"
+    t.integer  "responsible_officer"
   end
 
   add_index "risk_registers", ["project_id"], name: "index_risk_registers_on_project_id"

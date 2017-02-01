@@ -43,7 +43,7 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.save
-        #RiskMailer.delay.send_notification_to_rm(@risk_register) if User.risk_manager_exist?(@project) #send email notification to project & corporate risk manager 
+        #RiskMailer.delay.notify_responsible_officer(@risk_register) #send email notification to responsible officer i.e Risk Manager 
         
         format.html { redirect_to [@project, @risk_register], notice: "Risk with Risk No. #{@risk_register.risk_no} was successfully created." }
         format.json { render :show, status: :created, location: @risk_register }
@@ -61,7 +61,7 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.update(risk_register_params)
-        #RiskMailer.delay.send_risk_reminder(@risk_register) #send email notification to mitigators
+        #RiskMailer.delay.notify_responsible_officer(@risk_register) #send email notification to mitigators
         
         format.html { redirect_to [@project, @risk_register], notice: "Risk with Risk No. #{@risk_register.risk_no} was successfully updated." }
         format.json { render :show, status: :ok, location: @risk_register }
@@ -77,6 +77,7 @@ class RiskRegistersController < ApplicationController
     respond_to do |format|
       if @risk_register.update_attributes({approved: true, approved_by: current_user.id, approved_date: Date.today })
         #RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
+        #RiskMailer.delay.notify_coporate_rm(@risk_register) if User.corporate_rm_exist? #send email notification to corporate risk manager
         format.html { 
           flash[:success] = "Risk with Risk No. #{@risk_register.risk_no} was successfully approved."
           redirect_to project_approved_list_url(@project)

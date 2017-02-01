@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   
   has_secure_password
 
-  USER_ROLES = [["SysAdmin", 1], ["Corporate Risk Manager", 2], ["Project Risk Manager", 3], ["Risk Creator", 4], ["Risk Viewer", 5]]
+  USER_ROLES = [["SysAdmin", 1], ["Corporate Risk Manager", 2], ["Risk Manager", 3], ["Risk Creator", 4], ["Risk Viewer", 5]]
 
   validates :email, format: { with: /\A[^@\s]+@([^@.\s]+\.)+[^@.\s]+\z/ }, uniqueness: {case_sensitive: false}
   validates :first_name, :last_name, :designation, :department, :project, :email, :role, presence: true
@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
     User.where("project_id = ? AND role = ?", project, 3).collect { |user| user.email }
   end
   
-  def User.risk_manager_exist?(project) #check if any corporate or risk manager exists
-    User.get_corporate_rm.any? || User.get_project_rm(project).any?
+  def User.corporate_rm_exist? #check if any corporate risk manager exists
+    User.get_corporate_rm.any?
   end
   
   private

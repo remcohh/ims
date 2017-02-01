@@ -11,7 +11,7 @@ class RiskRegister < ActiveRecord::Base
   belongs_to :project
   belongs_to :creator, class_name: "User", foreign_key: "created_by"
   belongs_to :updator, class_name: "User", foreign_key: "updated_by"
-  belongs_to :approver, class_name: "User", foreign_key: "approved_by"
+  belongs_to :manager, class_name: "User", foreign_key: "responsible_officer"
 
   validates :project, :description, :target_date, :category_ids, :user_ids, :responsible_officer, presence: true
   validates :probability, inclusion: RISK_PROBABILITY
@@ -28,7 +28,7 @@ class RiskRegister < ActiveRecord::Base
   end
   
   def self.project_wise(project)
-		if project.to_i > 0
+		if project && project.to_i > 0
 		  self.where(project_id: project)
 		else
 		  self.all

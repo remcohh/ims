@@ -1,0 +1,6 @@
+A new Risk has been added at <%= @risk.project.name %>. Please visit NEEPCO Risk Management site and do the needful.
+Risk No: <%= @risk.risk_no %>.
+Category: <%= append_category_names(@risk.categories) %>
+Impact: <%= @risk.impact %>
+Probability: <%= @risk.probability %>
+Target Date: <%= format_target_date(@risk.target_date) %>
