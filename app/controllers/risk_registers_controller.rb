@@ -5,6 +5,7 @@ class RiskRegistersController < ApplicationController
   before_action :set_project
   before_action :check_current_user_project
   before_action :set_risk_register, only: [:show, :edit, :update, :destroy]
+  before_action :check_user_access, only: [:edit, :update, :destroy]
   before_action :check_risk_register_approved?, only: [:edit, :update, :destroy]
   
   # GET /risk_registers
@@ -75,7 +76,7 @@ class RiskRegistersController < ApplicationController
   def approve
     @risk_register = @project.risk_registers.find(params[:risk_no])
     respond_to do |format|
-      if @risk_register.update_attributes({approved: true, approved_by: current_user.id, approved_date: Date.today })
+      if @risk_register.update_attributes({approved: true, approved_date: Date.today })
         #RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
         #RiskMailer.delay.notify_coporate_rm(@risk_register) if User.corporate_rm_exist? #send email notification to corporate risk manager
         format.html { 
@@ -130,6 +131,13 @@ class RiskRegistersController < ApplicationController
     def check_risk_register_approved?
       if @risk_register.approved?
         flash[:danger] = "Risk No. #{@risk_register.risk_no} has already been Approved."
+        redirect_to project_risk_registers_url(@project)
+      end
+    end
+    
+    def check_user_access
+      unless admin_or_corporate_admin? || responsible_officer?(@risk_register.manager) || creator?(@risk_register.creator)
+        flash[:danger] = "You do not have the permission to access this page."
         redirect_to project_risk_registers_url(@project)
       end
     end

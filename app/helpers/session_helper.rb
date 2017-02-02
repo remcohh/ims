@@ -40,4 +40,12 @@ module SessionHelper
   def check_sysadmin_corporate_rm?(user)
     current_user == user || (current_user.role == 2 && user.role == 1)
   end
+  
+  def responsible_officer?(user)
+    current_user == user
+  end
+  
+  def creator?(user)
+    current_user == user
+  end
 end

@@ -21,8 +21,10 @@
         <td><%= format_target_date(risk_register.target_date) %></td>
         <td>
           <a href="<%= project_risk_register_path(@project, risk_register) %>"><i class="fa fa-search"></i> Show</a>&nbsp;
-          <a href="<%= edit_project_risk_register_path(@project, risk_register) %>"><i class="fa fa-edit"></i> Edit</a>&nbsp;
-          <%= link_to '<i class="fa fa-times"></i> Delete'.html_safe, project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% if admin_or_corporate_admin? || responsible_officer?(risk_register.manager) || creator?(risk_register.creator) %>
+            <a href="<%= edit_project_risk_register_path(@project, risk_register) %>"><i class="fa fa-edit"></i> Edit</a>&nbsp;
+            <%= link_to '<i class="fa fa-times"></i> Delete'.html_safe, project_risk_register_path(@project, risk_register), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>  
         </td>
       </tr>
     <% end %>

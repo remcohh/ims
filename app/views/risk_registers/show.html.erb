@@ -1,7 +1,7 @@
 <%= render 'layouts/header', title: "Show Risk" %>
 
 <% if !@risk_register.approved? %>
-  <% if admin_or_risk_manager? %>
+  <% if admin_or_corporate_admin? || responsible_officer?(@risk_register.manager) %>
     <div class="row">
       <div class="col-sm-12"><%= link_to 'Approve', project_approve_risk_register_path(@project, risk_no: @risk_register.id), class: "btn btn-primary" %></div>
     </div>

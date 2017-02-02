@@ -23,7 +23,7 @@ class Project < ActiveRecord::Base
 	
 	def get_mitigator_list
 		users.where.not(role: 5).order(:email).map do |s| 
-			[s.first_name+" "+s.last_name+", "+s.designation.name+", "+s.email, s.id] 
+			[s.first_name+" "+s.last_name+", "+s.designation.name, s.id] 
 		end	
 	end
 	
