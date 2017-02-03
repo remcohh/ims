@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
 	end
 	
 	def get_project_rm_list
-		users.where(role: 3).order(:email).map do |s|
+		users.where(role: [2, 3]).order(:email).map do |s|
 			[s.first_name+" "+s.last_name+", "+s.designation.name, s.id] 
 		end
 	end

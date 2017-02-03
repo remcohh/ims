@@ -1,0 +1,8 @@
+<p>The deadline for risk <%= @risk.risk_no %> is over. Please mitigate it soon.</p>
+
+<div>
+    <strong>Target Date:</strong> <%= format_target_date(@risk.target_date) %><br/>
+    <strong>Category:</strong> <%= append_category_names(@risk.categories) %><br>
+    <strong>Impact:</strong> <%= @risk.impact %><br>
+    <strong>Probability:</strong> <%= @risk.probability %><br>
+</div>

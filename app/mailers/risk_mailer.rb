@@ -1,6 +1,6 @@
 class RiskMailer < ApplicationMailer
     add_template_helper( RiskRegistersHelper)
-    add_template_helper( DashboardHelper)
+    include DashboardHelper
     
     default from: "itcellagbp@gmail.com"
     
@@ -13,7 +13,7 @@ class RiskMailer < ApplicationMailer
     def notify_coporate_rm(risk) #sending mails on approval to Corporate Risk Manager
         @risk = risk
         recipients = User.get_corporate_rm 
-        mail(to: recipients, subject: "Adding New Risk #{@risk.risk_no} to Risk Register.")
+        mail(to: recipients, subject: "New Risk #{@risk.risk_no} added to Risk Register.")
     end
     
     def notify_responsible_officer(risk) #sending mails on creation to Responisble Officer (i.e. Risk Manager)
@@ -24,7 +24,16 @@ class RiskMailer < ApplicationMailer
     
     def notify_risk_status(risk) #sending recurring mail to responsible officer if mitigation timeline has crossed 80%.
         @risk = risk
+        @days_remaining = date_difference(Date.today, @risk.target_date)
         recipients = @risk.manager.email
         mail(to: recipients, subject: "ALERT: Risk #{@risk.risk_no} mitigation period is about to complete.")
+    end
+    
+    def notify_delayed_risks(risk)
+        @risk = risk
+        recipients = []
+        recipients << @risk.manager.email
+        recipients << User.get_corporate_rm
+        mail(to: recipients, subject: "Risk mitigation deadline over for risk #{@risk.risk_no}.")
     end
 end

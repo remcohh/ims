@@ -25,7 +25,7 @@
             <li class="<%= 'active' if controller.controller_name == 'risk_registers' %>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Risk Register <span class="caret"></span></a>  
               <ul class="dropdown-menu">
-                <% Project.all.each do |project| %>
+                <% Project.order(:name).each do |project| %>
                   <li><%= link_to "#{project.name}", project_approved_list_path(project) %></li>
                 <% end %>
               </ul>

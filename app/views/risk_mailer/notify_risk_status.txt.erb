@@ -1,4 +1,8 @@
-The mitigation period for risk <%= @risk.risk_no %> is getting over. Only <%= date_difference(Date.today, @risk.target_date) %> days left. Please ensure that the risk is mitigated on time.
+<% if @days_remaining > 0 %>
+  Only <%= pluralize(@days_remaining, 'day') %> left for risk <%= @risk.risk_no %> to be mitigated. Please ensure that the risk is mitigated on time.
+<% else %>
+  Today is the last date for risk <%= @risk.risk_no %> to be mitigated. Please ensure that the risk is mitigated.
+<% end %>
 
 Target Date: <%= format_target_date(@risk.target_date) %>
 Category: <%= append_category_names(@risk.categories) %>
