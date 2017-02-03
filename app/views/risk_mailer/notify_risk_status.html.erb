@@ -1,0 +1,7 @@
+<p>The mitigation period for risk <%= @risk.risk_no %> is getting over. Only <%= date_difference(Date.today, @risk.target_date) %> days left. Please ensure that the risk is mitigated on time.</p>
+<div>
+    <strong>Target Date:</strong> <%= format_target_date(@risk.target_date) %>
+    <strong>Category:</strong> <%= append_category_names(@risk.categories) %><br>
+    <strong>Impact:</strong> <%= @risk.impact %><br>
+    <strong>Probability:</strong> <%= @risk.probability %><br>
+</div>

@@ -1,5 +1,6 @@
 class RiskMailer < ApplicationMailer
     add_template_helper( RiskRegistersHelper)
+    add_template_helper( DashboardHelper)
     
     default from: "itcellagbp@gmail.com"
     
@@ -19,5 +20,11 @@ class RiskMailer < ApplicationMailer
         @risk = risk
         recipients = @risk.manager.email
         mail(to: recipients, subject: "Assigment as Responsible Officer for the Risk #{@risk.risk_no}.")
+    end
+    
+    def notify_risk_status(risk) #sending recurring mail to responsible officer if mitigation timeline has crossed 80%.
+        @risk = risk
+        recipients = @risk.manager.email
+        mail(to: recipients, subject: "ALERT: Risk #{@risk.risk_no} mitigation period is about to complete.")
     end
 end

@@ -30,14 +30,14 @@
         <div class="row">
           <div class="col-sm-3"><span class="name">Responsible Officer</span></div>
           <div class="col-sm-3"><span class="name">Approved Date</span></div>
-          <div class="col-sm-3"><span class="name">Approved by</span></div>
           <div class="col-sm-3"><span class="name">Created by</span></div>
+          <div class="col-sm-3"><span class="name">Updated by</span></div>
         </div>
         <div class="row">
-          <div class="col-sm-3"><%= @risk_register.responsible_officer %></div>
+          <div class="col-sm-3"><%= user_info(@risk_register.manager) %></div>
           <div class="col-sm-3"><%= format_target_date(@risk_register.approved_date) %></div>
-          <div class="col-sm-3"><%= user_info(@risk_register.approver) %></div>
           <div class="col-sm-3"><%= user_info(@risk_register.creator) %></div>
+          <div class="col-sm-3"><%= user_info(@risk_register.updator) %></div>
         </div>
       </div>
     </div>

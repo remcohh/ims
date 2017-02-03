@@ -69,6 +69,9 @@ GEM
     delayed_job_active_record (4.1.1)
       activerecord (>= 3.0, < 5.1)
       delayed_job (>= 3.0, < 5)
+    delayed_job_recurring (0.3.6)
+      delayed_job (>= 3.0)
+      delayed_job_active_record
     erubis (2.7.0)
     execjs (2.7.0)
     font-awesome-rails (4.7.0.1)
@@ -182,6 +185,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   daemons
   delayed_job_active_record
+  delayed_job_recurring
   font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
