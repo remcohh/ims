@@ -42,5 +42,15 @@
 			  todayHighlight: true,
 			  autoclose: true,
     });
+    $('#risk_register_responsible_officer').click(function(){
+      previous = this.value;
+    }).change(function(){
+      if(previous) {
+        $('#risk_register_user_ids option[value="'+ previous + '"]').prop("selected", false);
+        $('.risk_mitigator').multiselect('refresh');
+      }
+      $('#risk_register_user_ids option[value="'+ $(this).val() + '"]').prop("selected", true);
+      $('.risk_mitigator').multiselect('refresh');
+    });
   });
 </script>
