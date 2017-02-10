@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">  
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= controller.controller_name %>">
 
 <%= render 'layouts/navigation' unless controller.controller_name == "session" %>
 
