@@ -36,3 +36,15 @@
         color: white;
     }
 }
+
+#critical_risk_panel{
+    .panel-heading {
+		padding-top: 5px;
+		font-weight: 500;
+		padding-bottom: 5px;
+	}
+	.panel-body {
+		padding-top: 18px;
+		padding-bottom: 8px;
+	}
+}
