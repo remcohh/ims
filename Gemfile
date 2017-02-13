@@ -1,5 +1,9 @@
 source 'http://rubygems.org'
 
+#pdf generator gem
+gem 'prawn'
+gem 'prawn-table', '~> 0.2.2'
+
 #datepicker gem
 gem 'bootstrap-datepicker-rails'
 

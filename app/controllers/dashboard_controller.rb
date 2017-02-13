@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   before_action :authorize
   def index
-     @risk_registers = RiskRegister.project_wise(params[:project_id]).where(probability: 'High', impact: 'High', approved: true, status: false).order("project_id, created_at DESC").paginate(page: params[:page], per_page: 10)
+    @risk_registers = RiskRegister.project_wise(params[:project_id]).where(probability: 'High', impact: 'High', approved: true, status: false).order("project_id, created_at DESC").paginate(page: params[:page], per_page: 10)
   end
 
   def show_risk
