@@ -28,7 +28,7 @@ class RiskRegister < ActiveRecord::Base
   end
   
   def self.project_wise(project)
-		if project && project.to_i > 0
+		if project.present?
 		  self.where(project_id: project)
 		else
 		  self.all

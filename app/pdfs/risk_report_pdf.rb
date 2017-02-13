@@ -1,0 +1,37 @@
+class RiskReportPdf < Prawn::Document
+    include RiskRegistersHelper
+    def initialize(risk_register)
+        super({:top_margin => 15, :page_size => 'A4', :page_layout => :landscape })
+        @risk_register = risk_register
+        gen_header
+        move_down 15
+        gen_page(@risk_register)
+        #stroke_axis
+    end
+
+    private
+    def gen_header
+        
+        filename = "#{Rails.root}/app/assets/images/logo.png"
+        image filename, width: 50, height: 50
+    end
+    
+    def gen_page(risk_register)
+        text 'Critical Risks', align: :center, font: "Helvetica ", style: :bold, size: 12
+        move_down 3
+        data = [["Risk No","Category","Description","Probability","Impact", "Project", "Mitigation Plan","Target Mitigation Date","Responsible Officer"]]
+        risk_register.each do |risk|
+            data += [[risk.risk_no, append_category_names(risk.categories), risk.description, risk.probability, risk.impact,
+                      risk.project.name, risk.mitigation_plan, format_target_date(risk.target_date), user_info(risk.manager)    
+                    ]]
+        end
+        
+        table data, column_widths: [55,70,180,60,45,70,155,65,70], :header => true, 
+                width: 770, cell_style: { size: 10, font: "Times-Roman", border_width: 0.5 } do
+            
+            row(0).font_style = :bold
+            row(0).size = 10
+        end
+    end
+
+end

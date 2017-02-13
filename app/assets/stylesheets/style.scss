@@ -30,9 +30,10 @@
 }
 
 #nav-header {
-    margin-top: 6px;
-    .nav {
-        padding-bottom: 9px;
+    margin-top: 10px;
+    .nav a {
+    	font-weight: bold;
+    	font-size: 13px;
     }
 }
 
@@ -52,7 +53,7 @@
 	}
 	.name {
 		font-weight: 600;
-		color: #111;
+		color: #222;
 		font-size: 13px;
 	}
 	.panel-heading {
@@ -72,20 +73,26 @@
 		}
 	}
 	.label {
-		font-size: 12px;
-		font-family: 'Serif';
+		font-size: 11px;
+		font-weight: 300;
 	}
 }
 
 #print-icon {
-	margin-top: -10px;
+	margin-top: 10px;
 	margin-bottom: 10px;
+	margin-right: 10px;
 	a {
 		text-decoration: none;
+		color: #000;
 	}
 }
 
 #nav-head {
 	font-family: 'Ubuntu Condensed', sans-serif;
 	font-size: 15px;
+}
+
+.btn-sm {
+	font-weight: 600;
 }

@@ -23,7 +23,11 @@
         </ul>
       </div>
     </div>
-    <br>
+    
+    <div id="print-icon">
+      <a href="<%= dashboard_path(format: "pdf", project_id: params[:project_id]) %>" target="_blank" class="pull-right"><i class="fa fa-print"></i> Print</a>
+    </div>
+    
     <table class="table table-bordered table-condensed">
       <thead class="row">
         <tr>
