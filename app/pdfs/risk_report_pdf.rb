@@ -1,8 +1,9 @@
 class RiskReportPdf < Prawn::Document
     include RiskRegistersHelper
-    def initialize(risk_register)
+    def initialize(risk_register, title)
         super({:top_margin => 15, :page_size => 'A4', :page_layout => :landscape })
         @risk_register = risk_register
+        @title = title
         gen_header
         move_down 15
         gen_page(@risk_register)
@@ -17,7 +18,7 @@ class RiskReportPdf < Prawn::Document
     end
     
     def gen_page(risk_register)
-        text 'Critical Risks', align: :center, font: "Helvetica ", style: :bold, size: 12
+        text @title, align: :center, font: "Helvetica ", style: :bold, size: 12
         move_down 3
         data = [["Risk No","Category","Description","Probability","Impact", "Project", "Mitigation Plan","Target Mitigation Date","Responsible Officer"]]
         risk_register.each do |risk|

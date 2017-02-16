@@ -35,6 +35,14 @@ class RiskRegister < ActiveRecord::Base
 		end
   end
   
+  def self.critical_risk_count
+    self.where(probability: "High", impact: "High", approved: true, status: false).count
+  end
+  
+  def self.off_target_risk_count
+    self.where(['approved=? AND status=? AND target_date < ?', true, false, Date.today]).count
+  end
+  
   private
   #generate unique risk no based on 2-digit project code, 2-digit year, and 4-digit autoincrement integer
   def generate_risk_no

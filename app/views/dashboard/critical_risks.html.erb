@@ -1,0 +1,64 @@
+<%= render 'layouts/header' %>
+<div class="panel panel-default" id="dashboard_risk_panel">
+  <div class="panel-heading">Critical Risks</div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <%= form_tag critical_risks_path, :method => 'get' do %>
+          <div class="row">
+            <div class="col-sm-6">
+              <%= select_tag 'project_id', options_for_select(Project.order(:name).collect{ |p| [p.name, p.id] }, selected: params[:project_id]),
+                    class: 'form-control', prompt: "ALL" %>
+            </div>
+          <div class="col-sm-6">
+            <%= submit_tag "Search", :name => nil, class: "btn btn-primary" %>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <div class="col-sm-6" id="status-label">
+        <ul class="pull-right list-inline">
+          <li class="danger-info">Danger</li>
+          <li class="warning-info">Warning</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div id="print-icon">
+      <a href="<%= critical_risks_path(format: "pdf", project_id: params[:project_id]) %>" target="_blank" class="pull-right"><i class="fa fa-print"></i> Print</a>
+    </div>
+    
+    <table class="table table-bordered table-condensed">
+      <thead class="row">
+        <tr>
+          <th class="col-sm-1">Risk No</th>
+          <th class="col-sm-4">Description</th>
+          <th class="col-sm-1">Probability</th>
+          <th class="col-sm-1">Impact</th>
+          <th class="col-sm-1">Project</th>
+          <th class="col-sm-2">Mitigation Plan</th>
+          <th class="col-sm-1">Target Date</th>
+          <th class="col-sm-1">Action</th>
+         </tr>
+      </thead>
+    
+      <tbody>
+        <% @risk_registers.each do |risk_register| %>
+          <tr class="<%= progress_class(risk_register) %>">
+            <td><%= risk_register.risk_no %></td>
+            <td><%= truncate(risk_register.description, length: 150) %></td>
+            <td><%= risk_register.probability %></td>
+            <td><%= risk_register.impact %></td>
+            <td><%= risk_register.project.name %></td>
+            <td><%= truncate(risk_register.mitigation_plan, length: 80) %></td>
+            <td><%= format_date(risk_register.target_date) %></td>
+             <td><%= link_to '<i class="fa fa-search"></i> Show'.html_safe, show_risk_path(risk_no: risk_register.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <%= will_paginate @risk_registers %>
+    
+  </div>
+</div>
