@@ -48,4 +48,12 @@ module RiskRegistersHelper
             "N/A"
         end
     end
+    
+    def risk_status(status)
+        if(status)
+            "Completed"
+        else
+            "Pending"
+        end
+    end
 end

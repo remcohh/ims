@@ -1,0 +1,22 @@
+<%= render 'layouts/header', title: "Report" %>
+
+<div class="row" id="dashboard-report">
+    <div class="col-sm-4">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="<%= report_path(status: 1, format: 'pdf') %>" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i> Completed Risk
+                </a>
+                <span class="badge"><%= RiskRegister.pending_risk_count %></span>
+            </li>
+            <li class="list-group-item">
+                <a href="<%= report_path(status: 0, format: 'pdf') %>" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i> Pending Risk
+                </a>
+                <span class="badge"><%= RiskRegister.completed_risk_count %></span>
+            </li>
+        </ul>
+    </div>
+</div>
+        
+

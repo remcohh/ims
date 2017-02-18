@@ -1,0 +1,38 @@
+<%= render 'layouts/header', title: "Advance Search" %>
+
+<%= simple_form_for(:search, url: searches_path) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-3 col-sm-4"><%= f.input :project, collection: Project.order(:name), prompt: "-- Select --" %></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4"><%= f.input :categories, collection: Category.order(:name), input_html: { class: "category",  multiple: true }, label_html: { class: "block_label" } %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-2 col-sm-3"><%= f.input :probability, collection: RiskRegister::RISK_PROBABILITY, prompt: "-- Select --" %></div>
+      <div class="col-md-2 col-sm-3"><%= f.input :impact, collection: RiskRegister::RISK_IMPACT, prompt: "-- Select --" %></div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-2 col-sm-3"><%= f.input :mitigation_target_from, as: :string, placeholder: "yyyy-mm-dd", input_html: {class: "datepicker"} %></div>
+      <div class="col-md-2 col-sm-3"><%= f.input :mitigation_target_to, as: :string, placeholder: "yyyy-mm-dd", input_html: {class: "datepicker"} %></div>
+    </div>
+    
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Search", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.category').multiselect();  
+    $('input.datepicker').datepicker({
+        format: 'yyyy-mm-dd',
+			  todayHighlight: true,
+			  autoclose: true,
+    });
+  });
+</script>

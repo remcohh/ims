@@ -43,6 +43,14 @@ class RiskRegister < ActiveRecord::Base
     self.where(['approved=? AND status=? AND target_date < ?', true, false, Date.today]).count
   end
   
+  def self.completed_risk_count
+    self.where(approved: true, status: true).count
+  end
+  
+  def self.pending_risk_count
+    self.where(approved: true, status: false).count
+  end
+  
   private
   #generate unique risk no based on 2-digit project code, 2-digit year, and 4-digit autoincrement integer
   def generate_risk_no

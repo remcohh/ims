@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+
   get 'dashboard' => 'dashboard#index'
   get 'show_risk' => 'dashboard#show_risk'
   get 'critical_risks' => 'dashboard#critical_risks'
   get 'off_target_risks' => 'dashboard#off_target_risks'
+  get 'report' => 'dashboard#report'
   get 'session/new'
 
+  resources :searches, only: [:new, :create, :show]
   resources :categories
   resources :projects do
     resources :risk_registers
