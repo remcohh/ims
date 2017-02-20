@@ -4,11 +4,8 @@ class SearchesController < ApplicationController
   def new
   end
   
-  def create
-    @risk = advance_search(params[:search])
-    redirect_to searches_path_url
+  def advance_search
+    @risk = search(params[:search]).order("project_id, created_at DESC")
   end
-  
-  def result
-  end
+
 end

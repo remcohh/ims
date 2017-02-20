@@ -33,12 +33,12 @@ class DashboardController < ApplicationController
   def report
     respond_to do |format|
       format.pdf do
-        if(params[:status] == '1')
-          @risk_registers = RiskRegister.where(approved: true, status: true).order("project_id, created_at DESC")
+        if(params[:status] == '1') #status 1 is for completed risks
+          @risk_registers = RiskRegister.project_wise(params[:project_id]).where(approved: true, status: true).order("project_id, created_at DESC")
           pdf = RiskReportPdf.new(@risk_registers, "Completed Risks List")
         end
-        if(params[:status] == '0')
-          @risk_registers = RiskRegister.where(approved: true, status: false).order("project_id, created_at DESC")
+        if(params[:status] == '0') #status 1 is for pending risks
+          @risk_registers = RiskRegister.project_wise(params[:project_id]).where(approved: true, status: false).order("project_id, created_at DESC")
           pdf = RiskReportPdf.new(@risk_registers, "Pending Risks List")
         end
         send_data pdf.render, filename: 'report.pdf', pdf: 'application/pdf',disposition: 'inline'

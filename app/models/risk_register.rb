@@ -43,12 +43,20 @@ class RiskRegister < ActiveRecord::Base
     self.where(['approved=? AND status=? AND target_date < ?', true, false, Date.today]).count
   end
   
-  def self.completed_risk_count
-    self.where(approved: true, status: true).count
+  def self.completed_risk_count(project='all')
+    if project == 'all'
+      self.where(approved: true, status: true).count
+    else
+      self.where(approved: true, status: true, project: project).count
+    end
   end
   
-  def self.pending_risk_count
-    self.where(approved: true, status: false).count
+  def self.pending_risk_count(project='all')
+    if project == 'all'
+      self.where(approved: true, status: false).count
+    else
+      self.where(approved: true, status: false, project: project).count
+    end
   end
   
   private

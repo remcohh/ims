@@ -4,17 +4,41 @@
     <div class="col-sm-4">
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="<%= report_path(status: 1, format: 'pdf') %>" target="_blank">
-                    <i class="fa fa-file-pdf-o"></i> Completed Risk
-                </a>
-                <span class="badge"><%= RiskRegister.pending_risk_count %></span>
-            </li>
-            <li class="list-group-item">
                 <a href="<%= report_path(status: 0, format: 'pdf') %>" target="_blank">
-                    <i class="fa fa-file-pdf-o"></i> Pending Risk
+                    <i class="fa fa-file-pdf-o"></i> All Pending Risk
                 </a>
                 <span class="badge"><%= RiskRegister.completed_risk_count %></span>
             </li>
+            <% Project.order(:name).each do |project| %>
+                <% if RiskRegister.pending_risk_count(project) > 0 %>
+                  <li class="list-group-item">
+                    <a href="<%= report_path(status: 0, project_id: project, format: 'pdf') %>" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i> <%= project.name %> Pending Risk
+                    </a>
+                    <span class="badge"><%= RiskRegister.pending_risk_count(project) %></span>
+                  </li>
+                <% end %>
+            <% end %>
+        </ul>
+    </div>
+    <div class="col-sm-4">
+        <ul class="list-group">
+            <li class="list-group-item">
+                <a href="<%= report_path(status: 1, format: 'pdf') %>" target="_blank">
+                    <i class="fa fa-file-pdf-o"></i> All Completed Risk
+                </a>
+                <span class="badge"><%= RiskRegister.completed_risk_count %></span>
+            </li>
+            <% Project.order(:name).each do |project| %>
+                <% if RiskRegister.completed_risk_count(project) > 0 %>
+                  <li class="list-group-item">
+                    <a href="<%= report_path(status: 1, project_id: project, format: 'pdf') %>" target="_blank">
+                        <i class="fa fa-file-pdf-o"></i> <%= project.name %> Completed Risk
+                    </a>
+                    <span class="badge"><%= RiskRegister.completed_risk_count(project) %></span>
+                  </li>
+                <% end %>
+            <% end %>
         </ul>
     </div>
 </div>
