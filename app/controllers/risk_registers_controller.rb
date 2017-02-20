@@ -44,7 +44,7 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.save
-        #RiskMailer.delay.notify_responsible_officer(@risk_register) #send email notification to responsible officer i.e Risk Manager 
+        RiskMailer.delay.notify_responsible_officer(@risk_register) #send email notification to responsible officer i.e Risk Manager 
         
         format.html { redirect_to [@project, @risk_register], notice: "Risk with Risk No. #{@risk_register.risk_no} was successfully created." }
         format.json { render :show, status: :created, location: @risk_register }
@@ -62,7 +62,7 @@ class RiskRegistersController < ApplicationController
     
     respond_to do |format|
       if @risk_register.update(risk_register_params)
-        #RiskMailer.delay.notify_responsible_officer(@risk_register) #send email notification to mitigators
+        RiskMailer.delay.notify_responsible_officer(@risk_register) #send email notification to mitigators
         
         format.html { redirect_to [@project, @risk_register], notice: "Risk with Risk No. #{@risk_register.risk_no} was successfully updated." }
         format.json { render :show, status: :ok, location: @risk_register }
@@ -77,8 +77,8 @@ class RiskRegistersController < ApplicationController
     @risk_register = @project.risk_registers.find(params[:risk_no])
     respond_to do |format|
       if @risk_register.update_attributes({approved: true, approved_date: Date.today })
-        #RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
-        #RiskMailer.delay.notify_coporate_rm(@risk_register) if User.corporate_rm_exist? #send email notification to corporate risk manager
+        RiskMailer.delay.send_risk_notification(@risk_register) #send email notification to mitigators
+        RiskMailer.delay.notify_coporate_rm(@risk_register) if User.corporate_rm_exist? #send email notification to corporate risk manager
         format.html { 
           flash[:success] = "Risk with Risk No. #{@risk_register.risk_no} was successfully approved."
           redirect_to project_approved_list_url(@project)

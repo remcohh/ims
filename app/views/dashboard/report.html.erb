@@ -7,7 +7,7 @@
                 <a href="<%= report_path(status: 0, format: 'pdf') %>" target="_blank">
                     <i class="fa fa-file-pdf-o"></i> All Pending Risk
                 </a>
-                <span class="badge"><%= RiskRegister.completed_risk_count %></span>
+                <span class="badge"><%= RiskRegister.pending_risk_count %></span>
             </li>
             <% Project.order(:name).each do |project| %>
                 <% if RiskRegister.pending_risk_count(project) > 0 %>
