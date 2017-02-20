@@ -26,11 +26,11 @@
       <thead class="row">
         <tr>
           <th class="col-sm-1">Risk No</th>
-          <th class="col-sm-4">Description</th>
+          <th class="col-sm-5">Description</th>
           <th class="col-sm-1">Probability</th>
           <th class="col-sm-1">Impact</th>
           <th class="col-sm-1">Project</th>
-          <th class="col-sm-2">Mitigation Plan</th>
+          <th class="col-sm-1">Risk Status</th>
           <th class="col-sm-1">Target Date</th>
           <th class="col-sm-1">Action</th>
          </tr>
@@ -44,7 +44,7 @@
             <td><%= risk_register.probability %></td>
             <td><%= risk_register.impact %></td>
             <td><%= risk_register.project.name %></td>
-            <td><%= truncate(risk_register.mitigation_plan, length: 80) %></td>
+            <td><%= risk_status(risk_register.status) %></td>
             <td class="danger-status"><%= format_date(risk_register.target_date) %></td>
              <td><%= link_to '<i class="fa fa-search"></i> Show'.html_safe, show_risk_path(risk_no: risk_register.id) %></td>
           </tr>

@@ -43,6 +43,10 @@
             <li><i class="fa fa-share"></i> <%= link_to "Users", projects_path %></li>  
           <% end %>
           
+          <% if controller.controller_name == "searches" && controller.action_name != "new" %>
+            <li><i class="fa fa-share"></i> <%= link_to "Advance Search", new_search_path %></li>  
+          <% end %>
+          
           <% unless controller.controller_name == "dashboard" && controller.action_name == "index" %>
             <li class="active">
                 <i class="fa fa-wrench"></i> <%= title %>
