@@ -2,11 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.warning-status, .warning-status a {
-    background: #e67e22;
+.danger-status, .danger-status a {
+    background: #f39c12;
     color: #fff;
 }
-.danger-status, .danger-status a {
+.warning-status, .warning-status a {
+    background: #5499C7 ;
+    color: #fff;
+}
+
+.critical-status, .critical-status a {
     background: #c0392b;
     color: #fff;
 }
@@ -15,7 +20,7 @@
     color: #222;
 }
 
-.warning-status a:hover, .danger-status a:hover, .default-status a:hover {
+.warning-status a:hover, .danger-status a:hover, .critical-status a:hover, .default-status a:hover {
     text-decoration: none;
     color: #2c3e50;
 }
@@ -27,11 +32,15 @@
 }
 
 #status-label {
-    .warning-info {
-        background: #e67e22;
+    .danger-info {
+        background: #f39c12;
         color: white;
     }
-    .danger-info {
+    .warning-info {
+        background: #5499C7 ;
+        color: white;
+    }
+    .critical-info {
         background: #c0392b;
         color: white;
     }

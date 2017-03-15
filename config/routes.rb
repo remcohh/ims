@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'dashboard' => 'dashboard#index'
   get 'show_risk' => 'dashboard#show_risk'
   get 'critical_risks' => 'dashboard#critical_risks'
-  get 'off_target_risks' => 'dashboard#off_target_risks'
+  get 'mitigated_risks' => 'dashboard#mitigated_risks'
   get 'report' => 'dashboard#report'
   post 'advance_search' => 'searches#advance_search'
 

@@ -2,7 +2,7 @@ class DailyEmailer
   include DashboardHelper
   include Delayed::RecurringJob
   run_every 1.day
-  run_at '5:22pm'
+  run_at '10:30am'
   timezone 'Kolkata'
   queue 'slow-jobs'
   def perform

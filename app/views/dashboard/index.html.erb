@@ -23,6 +23,30 @@
 	        </a>
 	    </div>
 	</div>
+	
+	<div class="col-md-3">
+	    <div class="panel panel-red">
+	        <div class="panel-heading">
+	            <div class="row">
+	                <div class="col-xs-3">
+	                    <i class="fa fa-trash fa-5x"></i>
+	                </div>
+	                <div class="col-xs-9 text-right">
+	                    <div class="huge"><%= RiskRegister.completed_risk_count %></div>
+	                    <div>Mitigated Risks</div>
+	                </div>
+	            </div>
+	        </div>
+	        <a href="<%= mitigated_risks_path %>" data-toggle="modal">
+	            <div class="panel-footer">
+	                <span class="pull-left">View Details</span>
+	                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+	                <div class="clearfix"></div>
+	            </div>
+	        </a>
+	    </div>
+	</div>
+	
 	<div class="col-md-3">
 	    <div class="panel panel-green">
 	        <div class="panel-heading">
@@ -45,28 +69,6 @@
 	        </a>
 	    </div>
 	</div>
-	<div class="col-md-3">
-	    <div class="panel panel-red">
-	        <div class="panel-heading">
-	            <div class="row">
-	                <div class="col-xs-3">
-	                    <i class="fa fa-trash fa-5x"></i>
-	                </div>
-	                <div class="col-xs-9 text-right">
-	                    <div class="huge"><%= RiskRegister.off_target_risk_count %></div>
-	                    <div>Off Target Risks</div>
-	                </div>
-	            </div>
-	        </div>
-	        <a href="<%= off_target_risks_path %>" data-toggle="modal">
-	            <div class="panel-footer">
-	                <span class="pull-left">View Details</span>
-	                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-	                <div class="clearfix"></div>
-	            </div>
-	        </a>
-	    </div>
-	</div>
 	
 	<div class="col-md-3">
 	    <div class="panel panel-yellow">
@@ -76,7 +78,7 @@
 	                    <i class="fa fa-file fa-5x"></i>
 	                </div>
 	                <div class="col-xs-9 text-right">
-	                    <div class="huge">2</div>
+	                    <div class="huge"><i class="fa fa-file"></i></div>
 	                    <div>Reports</div>
 	                </div>
 	            </div>

@@ -27,7 +27,7 @@ module DashboardHelper
         elsif(remaining_days <= eighty_pc && remaining_days >= 0) #if timeline is greater than 80% of the mitigation duration.
             "danger-status"
         elsif remaining_days < 0
-            "danger-status"    
+            "critical-status"    
         else
             "default-status"
         end

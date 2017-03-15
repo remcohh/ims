@@ -4,7 +4,7 @@ class RiskMailer < ApplicationMailer
     
     default from: "itcellagbp@gmail.com"
     
-    def send_risk_notification(risk) #sending mails on approval from responsible officer
+    def send_risk_notification(risk) #sending mails on approval from responsible officer to all risk mitigators
         @risk = risk
         recipients = @risk.users.collect { |user| user.email } #collect mitigator emails.
         mail(to: recipients, subject: "Assigment as Risk mitigator for risk no #{@risk.risk_no}.")
@@ -25,7 +25,7 @@ class RiskMailer < ApplicationMailer
     def notify_risk_status(risk) #sending recurring mail to responsible officer if mitigation timeline has crossed 80%.
         @risk = risk
         @days_remaining = date_difference(Date.today, @risk.target_date)
-        recipients = @risk.manager.email
+        recipients = @risk.users.collect { |user| user.email } #collect mitigator emails.
         mail(to: recipients, subject: "ALERT: Risk #{@risk.risk_no} mitigation period is about to complete.")
     end
     

@@ -26,6 +26,16 @@
       <div class="col-md-10"><%= f.input :mitigation_plan, label: "Mitigation Plan" %></div>
     </div>
     
+    <div class="row">
+      <% if @risk_register.approved? %>
+        <% if @risk_register.status? %>
+          <div class="col-md-4"><%= f.input :status, label: "Completed" %></div>
+        <% else %> 
+          <div class="col-md-4"><%= f.input :approved, label: "Approved" %></div>
+        <% end %>  
+      <% end %>  
+    </div>
+    
   </div>
   <div class="form-actions">
     <%= f.button :submit %>

@@ -4,7 +4,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-sm-6">
-        <%= form_tag off_target_risks_path, :method => 'get' do %>
+        <%= form_tag mitigated_risks_path, :method => 'get' do %>
           <div class="row">
             <div class="col-sm-6">
               <%= select_tag 'project_id', options_for_select(Project.order(:name).collect{ |p| [p.name, p.id] }, selected: params[:project_id]),
@@ -19,7 +19,7 @@
     </div>
     
     <div id="print-icon">
-      <a href="<%= off_target_risks_path(format: "pdf", project_id: params[:project_id]) %>" target="_blank" class="pull-right"><i class="fa fa-print"></i> Print</a>
+      <a href="<%= mitigated_risks_path(format: "pdf", project_id: params[:project_id]) %>" target="_blank" class="pull-right"><i class="fa fa-print"></i> Print</a>
     </div>
     
     <table class="table table-bordered table-condensed table-striped">
@@ -45,7 +45,7 @@
             <td><%= risk_register.impact %></td>
             <td><%= risk_register.project.name %></td>
             <td><%= risk_status(risk_register.status) %></td>
-            <td class="danger-status"><%= format_date(risk_register.target_date) %></td>
+            <td><%= format_date(risk_register.target_date) %></td>
              <td><%= link_to '<i class="fa fa-search"></i> Show'.html_safe, show_risk_path(risk_no: risk_register.id) %></td>
           </tr>
         <% end %>
