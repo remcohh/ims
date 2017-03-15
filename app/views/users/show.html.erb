@@ -1,42 +1,56 @@
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+<div class="row" id="user-info">
+  <div class="col-md-6">
+    <%= render 'layouts/header', title: "User Info" %>
+    <div class="info">
+      <div class="row">
+        <div class="col-md-3"><strong>Email</strong></div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-8"><%= @user.email %></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3"><strong>First name:</strong></div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-8"><%= @user.first_name %></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3"><strong>Mid name:</strong></div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-8"><%= @user.mid_name %></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3"><strong>Last name:</strong></div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-8"><%= @user.last_name %></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3"><strong>Designation:</strong></div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-8"><%= @user.designation.name %></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3"><strong>Department:</strong></div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-8"><%= @user.department %></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3"><strong>Project:</strong></div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-8"><%= @user.project.name %></div>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3"><strong>Role:</strong></div>
+        <div class="col-md-1">:</div>  
+        <div class="col-md-8"><%= check_user_role(@user.role) %></div>
+      </div>
+    </div>  
+  </div> 
+</div>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
 
-<p>
-  <strong>Mid name:</strong>
-  <%= @user.mid_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<p>
-  <strong>Designation:</strong>
-  <%= @user.designation.name %>
-</p>
-
-<p>
-  <strong>Department:</strong>
-  <%= @user.department %>
-</p>
-
-<p>
-  <strong>Project:</strong>
-  <%= @user.project.name %>
-</p>
-
-<p>
-  <strong>Role:</strong>
-  <%= check_user_role(@user.role) %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

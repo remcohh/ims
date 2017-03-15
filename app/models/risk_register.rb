@@ -39,8 +39,12 @@ class RiskRegister < ActiveRecord::Base
     self.where(probability: "High", impact: "High", approved: true, status: false).count
   end
   
-  def self.unapproved_risk_count
-    self.where(approved: false, status: false).count
+  def self.unapproved_risk_count(project='all')
+    if project == 'all'
+      self.where(approved: false, status: false).count
+    else
+      self.where(approved: false, status: false, project: project).count
+    end
   end
   
   def self.completed_risk_count(project='all')

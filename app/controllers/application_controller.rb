@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def only_sysadmin
-    unless admin?
+    unless sysadmin?
       flash[:danger] = "You are not authorized to access this page. Contact your Administrator"
       redirect_to dashboard_url
     end
