@@ -22,11 +22,29 @@ class RiskMailer < ApplicationMailer
         mail(to: recipients, subject: "Assigment as Responsible Officer for the Risk #{@risk.risk_no}.")
     end
     
-    def notify_risk_status(risk) #sending recurring mail to responsible officer if mitigation timeline has crossed 80%.
+    def notify_80pc_risk_status(risk) #sending recurring mail to responsible officer if mitigation timeline has crossed 80%.
         @risk = risk
         @days_remaining = date_difference(Date.today, @risk.target_date)
+        
         recipients = @risk.users.collect { |user| user.email } #collect mitigator emails.
-        mail(to: recipients, subject: "ALERT: Risk #{@risk.risk_no} mitigation period is about to complete.")
+        recipients << @risk.manager.email #collect responsible officer email.
+        recipients.uniq!
+        
+        if @days_remaining < 0
+            mail(to: recipients, subject: "ALERT: Risk #{@risk.risk_no} mitigation period is completed.")
+        else
+            mail(to: recipients, subject: "ALERT: Risk #{@risk.risk_no} mitigation period is about to complete.")
+        end
+    end
+    
+    def notify_50pc_risk_status(risk) #sending recurring mail to responsible officer if mitigation timeline has crossed 50%.
+        @risk = risk
+        
+        recipients = @risk.users.collect { |user| user.email } #collect mitigator emails.
+        recipients << @risk.manager.email #collect responsible officer email.
+        recipients.uniq!
+        
+        mail(to: recipients, subject: "ALERT: 50% Mitigation period is completed for Risk #{@risk.risk_no}.")
     end
     
     def notify_delayed_risks(risk)

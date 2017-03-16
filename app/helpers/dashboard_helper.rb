@@ -47,6 +47,21 @@ module DashboardHelper
         return remaining_days <= eighty_pc && remaining_days >= 0
     end
     
+    #check if timeline is greater than 80% of the mitigation duration.
+    def timeline_eq_50_pc?(risk_register)
+        created_at = Date.parse(risk_register.created_at.strftime("%Y-%m-%d"))
+        target_date = risk_register.target_date
+        today = Date.today
+    
+        timeline = date_difference(created_at, target_date)
+        remaining_days = date_difference(today, target_date)
+        
+        fifty_pc = timeline * 0.5
+        eighty_pc = timeline - (timeline * 0.8)
+    
+        return remaining_days <= fifty_pc && remaining_days > eighty_pc && !risk_register.fifty_pc?
+    end
+    
     #check if risk mitigation deadline is over.
     def deadline_over?(risk_register)
         return date_difference(Date.today, risk_register.target_date) < 0

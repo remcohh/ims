@@ -1,8 +1,11 @@
 <% if @days_remaining > 0 %>
     <p>Only <%= pluralize(@days_remaining, 'day') %> left for risk <%= @risk.risk_no %> to be mitigated. Please ensure that the risk is mitigated on time.</p>
-<% else %>
+<% elsif @remaining_days == 0 %>
     <p>Today is the last date for risk <%= @risk.risk_no %> to be mitigated. Please ensure that the risk is mitigated.</p>
+<% else %>
+    <p>Mitigation period for Risk <%= @risk.risk_no %> is completed. Please ensure the risk is mitigated as soon as possible.</p>
 <% end %>
+
 
 <div>
     <strong>Target Date:</strong> <%= format_target_date(@risk.target_date) %><br/>

@@ -9,8 +9,11 @@ class RiskMailerPreview < ActionMailer::Preview
     def notify_responsible_officer
         RiskMailer.notify_responsible_officer(RiskRegister.find(32))
     end
-    def notify_risk_status
-        RiskMailer.notify_risk_status(RiskRegister.find(36))
+    def notify_80pc_risk_status
+        RiskMailer.notify_80pc_risk_status(RiskRegister.find(36))
+    end
+    def notify_50pc_risk_status
+        RiskMailer.notify_50pc_risk_status(RiskRegister.find(36))
     end
     def notify_delayed_risks
         RiskMailer.notify_delayed_risks(RiskRegister.find(36))

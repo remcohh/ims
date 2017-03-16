@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170119102704) do
+ActiveRecord::Schema.define(version: 20170316110102) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20170119102704) do
     t.boolean  "approved",            default: false
     t.date     "approved_date"
     t.integer  "responsible_officer"
+    t.boolean  "fifty_pc",            default: false
   end
 
   add_index "risk_registers", ["project_id"], name: "index_risk_registers_on_project_id"

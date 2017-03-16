@@ -8,7 +8,11 @@ class DailyEmailer
   def perform
     RiskRegister.all.each do |risk| 
       if timeline_gt_80_pc?(risk)
-        RiskMailer.notify_risk_status(risk).deliver
+        RiskMailer.notify_80pc_risk_status(risk).deliver
+      end
+      if timeline_eq_50_pc?(risk)
+        RiskMailer.notify_50pc_risk_status(risk).deliver
+        risk.update_attribute(:fifty_pc, true)
       end
       if deadline_over?(risk)
         RiskMailer.notify_delayed_risks(risk).deliver
