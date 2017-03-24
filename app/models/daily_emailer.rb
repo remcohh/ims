@@ -6,7 +6,7 @@ class DailyEmailer
   timezone 'Kolkata'
   queue 'slow-jobs'
   def perform
-    RiskRegister.all.each do |risk| 
+    RiskRegister.where(approved: true, status: false).each do |risk| 
       if timeline_gt_80_pc?(risk)
         RiskMailer.notify_80pc_risk_status(risk).deliver
       end
