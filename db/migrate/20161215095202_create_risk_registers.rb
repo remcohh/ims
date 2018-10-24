@@ -1,4 +1,4 @@
-class CreateRiskRegisters < ActiveRecord::Migration
+class CreateRiskRegisters < ActiveRecord::Migration[4.2]
   def change
     create_table :risk_registers do |t|
       t.string :risk_no, index: true
