@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20170316110102) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -24,8 +27,8 @@ ActiveRecord::Schema.define(version: 20170316110102) do
     t.integer "category_id"
   end
 
-  add_index "categories_risk_registers", ["category_id"], name: "index_categories_risk_registers_on_category_id"
-  add_index "categories_risk_registers", ["risk_register_id"], name: "index_categories_risk_registers_on_risk_register_id"
+  add_index "categories_risk_registers", ["category_id"], name: "index_categories_risk_registers_on_category_id", using: :btree
+  add_index "categories_risk_registers", ["risk_register_id"], name: "index_categories_risk_registers_on_risk_register_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -41,7 +44,7 @@ ActiveRecord::Schema.define(version: 20170316110102) do
     t.datetime "updated_at"
   end
 
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority"
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "designations", force: :cascade do |t|
     t.string   "name"
@@ -63,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170316110102) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "risk_mitigations", ["risk_register_id"], name: "index_risk_mitigations_on_risk_register_id"
+  add_index "risk_mitigations", ["risk_register_id"], name: "index_risk_mitigations_on_risk_register_id", using: :btree
 
   create_table "risk_registers", force: :cascade do |t|
     t.string   "risk_no"
@@ -84,16 +87,16 @@ ActiveRecord::Schema.define(version: 20170316110102) do
     t.boolean  "fifty_pc",            default: false
   end
 
-  add_index "risk_registers", ["project_id"], name: "index_risk_registers_on_project_id"
-  add_index "risk_registers", ["risk_no"], name: "index_risk_registers_on_risk_no"
+  add_index "risk_registers", ["project_id"], name: "index_risk_registers_on_project_id", using: :btree
+  add_index "risk_registers", ["risk_no"], name: "index_risk_registers_on_risk_no", using: :btree
 
   create_table "risk_registers_users", force: :cascade do |t|
     t.integer "risk_register_id"
     t.integer "user_id"
   end
 
-  add_index "risk_registers_users", ["risk_register_id"], name: "index_risk_registers_users_on_risk_register_id"
-  add_index "risk_registers_users", ["user_id"], name: "index_risk_registers_users_on_user_id"
+  add_index "risk_registers_users", ["risk_register_id"], name: "index_risk_registers_users_on_risk_register_id", using: :btree
+  add_index "risk_registers_users", ["user_id"], name: "index_risk_registers_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email"
@@ -109,15 +112,15 @@ ActiveRecord::Schema.define(version: 20170316110102) do
     t.datetime "updated_at",      null: false
   end
 
-  add_index "users", ["designation_id"], name: "index_users_on_designation_id"
-  add_index "users", ["project_id"], name: "index_users_on_project_id"
+  add_index "users", ["designation_id"], name: "index_users_on_designation_id", using: :btree
+  add_index "users", ["project_id"], name: "index_users_on_project_id", using: :btree
 
-  create_table "users_risk_registers", force: :cascade do |t|
-    t.integer "risk_register_id"
-    t.integer "user_id"
-  end
-
-  add_index "users_risk_registers", ["risk_register_id"], name: "index_users_risk_registers_on_risk_register_id"
-  add_index "users_risk_registers", ["user_id"], name: "index_users_risk_registers_on_user_id"
-
+  add_foreign_key "categories_risk_registers", "categories"
+  add_foreign_key "categories_risk_registers", "risk_registers"
+  add_foreign_key "risk_mitigations", "risk_registers"
+  add_foreign_key "risk_registers", "projects"
+  add_foreign_key "risk_registers_users", "risk_registers"
+  add_foreign_key "risk_registers_users", "users"
+  add_foreign_key "users", "designations"
+  add_foreign_key "users", "projects"
 end
